@@ -32,8 +32,7 @@ public class WHFrameworkDemo : ModuleRules
 				"GameplayAbilities",
 				"GameplayTags",
 				"GameplayTasks",
-				"ProceduralMeshComponent",
-				"WHFramework"
+				"ProceduralMeshComponent"
 			}
 		);
 
