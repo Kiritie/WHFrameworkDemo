@@ -3,6 +3,7 @@
 
 #include "Voxel/WHDVoxelModule.h"
 
+#include "TimerManager.h"
 #include "Components/StaticMeshComponent.h"
 #include "Gameplay/WHDGameState.h"
 #include "Gameplay/WHDPlayerController.h"
@@ -31,14 +32,14 @@ AWHDVoxelModule::~AWHDVoxelModule()
 }
 
 #if WITH_EDITOR
-void AWHDVoxelModule::OnGenerate_Implementation()
+void AWHDVoxelModule::OnGenerate()
 {
-	Super::OnGenerate_Implementation();
+	Super::OnGenerate();
 }
 
-void AWHDVoxelModule::OnDestroy_Implementation()
+void AWHDVoxelModule::OnDestroy()
 {
-	Super::OnDestroy_Implementation();
+	Super::OnDestroy();
 }
 #endif
 

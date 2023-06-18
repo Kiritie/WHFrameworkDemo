@@ -15,6 +15,8 @@ AWHDGameMode::AWHDGameMode()
 {
 	// set default pawn class to our Blueprinted character
 	DefaultPawnClass = APawn::StaticClass();
+	PlayerControllerClass = AWHDPlayerController::StaticClass();
+	GameStateClass = AWHDGameState::StaticClass();
 }
 
 void AWHDGameMode::OnInitialize_Implementation()
