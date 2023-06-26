@@ -26,14 +26,11 @@ public:
 	AWHDVoxelChunk();
 
 protected:
-	// Called when the game starts or when spawned
-	virtual void BeginPlay() override;
-
 	virtual void OnSpawn_Implementation(const TArray<FParameter>& InParams) override;
 		
 	virtual void OnDespawn_Implementation(bool bRecovery) override;
 
-	virtual void LoadData(FSaveData* InSaveData, EPhase InPhase) override;
+	virtual void LoadData(FSaveData* InSaveData, EPhase InPhase = EPhase::Final) override;
 
 	virtual FSaveData* ToData() override;
 
@@ -42,10 +39,6 @@ protected:
 	virtual void OnBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult) override;
 
 	virtual void OnEndOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex) override;
-
-public:
-	// Called every frame
-	virtual void Tick(float DeltaTime) override;
 
 	//////////////////////////////////////////////////////////////////////////
 	// Chunk

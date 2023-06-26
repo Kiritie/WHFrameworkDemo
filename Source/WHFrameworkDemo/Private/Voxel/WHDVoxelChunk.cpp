@@ -24,12 +24,6 @@ AWHDVoxelChunk::AWHDVoxelChunk()
 {
 }
 
-// Called when the game starts or when spawned
-void AWHDVoxelChunk::BeginPlay()
-{
-	Super::BeginPlay();
-}
-
 void AWHDVoxelChunk::OnSpawn_Implementation(const TArray<FParameter>& InParams)
 {
 	Super::OnSpawn_Implementation(InParams);
@@ -63,12 +57,6 @@ void AWHDVoxelChunk::OnBeginOverlap(UPrimitiveComponent* OverlappedComponent, AA
 void AWHDVoxelChunk::OnEndOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
 {
 	Super::OnEndOverlap(OverlappedComponent, OtherActor, OtherComp, OtherBodyIndex);
-}
-
-// Called every frame
-void AWHDVoxelChunk::Tick(float DeltaTime)
-{
-	Super::Tick(DeltaTime);
 }
 
 void AWHDVoxelChunk::Initialize(FIndex InIndex, int32 InBatch)
