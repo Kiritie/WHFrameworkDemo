@@ -17,6 +17,6 @@ public:
 	virtual void OnRefresh_Implementation(float DeltaSeconds) override;
 	
 protected:
-	UPROPERTY(EditAnywhere, Category = "Chunk")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "CameraStats")
 	bool bFloorToChunk;
 };

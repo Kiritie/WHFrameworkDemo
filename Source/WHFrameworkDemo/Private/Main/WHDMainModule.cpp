@@ -31,8 +31,6 @@ IMPLEMENTATION_MAIN_MODULE(AWHDMainModule)
 
 AWHDMainModule::AWHDMainModule()
 {
-	// set default pawn class to our Blueprinted character
-
 	ModuleClasses = TArray<TSubclassOf<AModuleBase>>();
 	ModuleClasses.Add(AAbilityModule::StaticClass());
 	ModuleClasses.Add(AAIModule::StaticClass());

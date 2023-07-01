@@ -16,7 +16,7 @@ void AWHDRoamCameraPawn::OnRefresh_Implementation(float DeltaSeconds)
 {
 	Super::OnRefresh_Implementation(DeltaSeconds);
 
-	if(GetActorLocation().IsNearlyZero() && bFloorToChunk)
+	if(bFloorToChunk && GetActorLocation().IsNearlyZero())
 	{
 		FHitResult hitResult;
 		if(UVoxelModuleBPLibrary::VoxelAgentTraceSingle(GetActorLocation(), Sphere->GetScaledSphereRadius(), Sphere->GetScaledSphereRadius(), {}, hitResult, true, 10, true))

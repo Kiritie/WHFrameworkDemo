@@ -130,10 +130,10 @@ AVoxelChunk* AWHDVoxelModule::SpawnChunk(FIndex InIndex, bool bAddToQueue)
 
 ECollisionChannel AWHDVoxelModule::GetChunkTraceType() const
 {
-	return Super::GetChunkTraceType();
+	return ECollisionChannel::ECC_GameTraceChannel9;
 }
 
 ECollisionChannel AWHDVoxelModule::GetVoxelTraceType() const
 {
-	return Super::GetVoxelTraceType();
+	return ECollisionChannel::ECC_GameTraceChannel10;
 }
