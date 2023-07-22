@@ -56,8 +56,6 @@ protected:
 	virtual void OnWorldStateChanged() override;
 
 protected:
-	virtual void GenerateVoxels() override;
-
 	virtual void GenerateWorld() override;
 
 public:

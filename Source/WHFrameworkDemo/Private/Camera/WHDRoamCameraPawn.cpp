@@ -5,6 +5,7 @@
 
 #include "Camera/CameraModuleBPLibrary.h"
 #include "Components/SphereComponent.h"
+#include "Voxel/VoxelModule.h"
 #include "Voxel/VoxelModuleBPLibrary.h"
 
 AWHDRoamCameraPawn::AWHDRoamCameraPawn()
@@ -12,16 +13,21 @@ AWHDRoamCameraPawn::AWHDRoamCameraPawn()
 	CameraName = FName("RoamCamera");
 }
 
+void AWHDRoamCameraPawn::OnPreparatory_Implementation(EPhase InPhase)
+{
+	Super::OnPreparatory_Implementation(InPhase);
+}
+
 void AWHDRoamCameraPawn::OnRefresh_Implementation(float DeltaSeconds)
 {
 	Super::OnRefresh_Implementation(DeltaSeconds);
 
-	if(bFloorToChunk && GetActorLocation().IsNearlyZero())
+	if(bFloorToChunk && GetActorLocation().Z == 0.f && AVoxelModule::Get()->IsBasicGenerated())
 	{
-		FHitResult hitResult;
-		if(UVoxelModuleBPLibrary::VoxelAgentTraceSingle(GetActorLocation(), Sphere->GetScaledSphereRadius(), Sphere->GetScaledSphereRadius(), {}, hitResult, true, 10, true))
+		FHitResult HitResult;
+		if(UVoxelModuleBPLibrary::VoxelAgentTraceSingle(GetActorLocation(), FVector2D(UVoxelModuleBPLibrary::GetWorldData().GetChunkRealSize().X, UVoxelModuleBPLibrary::GetWorldData().GetChunkRealSize().Y), Sphere->GetScaledSphereRadius(), Sphere->GetScaledSphereRadius(), {}, HitResult, false, 10, true))
 		{
-			UCameraModuleBPLibrary::SetCameraLocation(hitResult.Location);
+			UCameraModuleBPLibrary::SetCameraLocation(HitResult.Location);
 		}
 	}
 }

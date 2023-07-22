@@ -93,11 +93,6 @@ void AWHDVoxelModule::OnWorldStateChanged()
 	Super::OnWorldStateChanged();
 }
 
-void AWHDVoxelModule::GenerateVoxels()
-{
-	Super::GenerateVoxels();
-}
-
 void AWHDVoxelModule::GenerateWorld()
 {
 	Super::GenerateWorld();

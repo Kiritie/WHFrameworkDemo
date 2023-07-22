@@ -14,6 +14,9 @@ public:
 	AWHDRoamCameraPawn();
 
 public:
+	virtual void OnPreparatory_Implementation(EPhase InPhase) override;
+
+public:
 	virtual void OnRefresh_Implementation(float DeltaSeconds) override;
 	
 protected:

@@ -12,7 +12,8 @@
 #include "Event/EventModule.h"
 #include "FSM/FSMModule.h"
 #include "Input/InputModule.h"
-#include "LatentAction/LatentActionModule.h"
+#include "Animation/AnimationModule.h"
+#include "Input/WHDInputModule.h"
 #include "Media/MediaModule.h"
 #include "Network/NetworkModule.h"
 #include "ObjectPool/ObjectPoolModule.h"
@@ -34,6 +35,7 @@ AWHDMainModule::AWHDMainModule()
 	ModuleClasses = TArray<TSubclassOf<AModuleBase>>();
 	ModuleClasses.Add(AAbilityModule::StaticClass());
 	ModuleClasses.Add(AAIModule::StaticClass());
+	ModuleClasses.Add(AAnimationModule::StaticClass());
 	ModuleClasses.Add(AAssetModule::StaticClass());
 	ModuleClasses.Add(AAudioModule::StaticClass());
 	ModuleClasses.Add(ACameraModule::StaticClass());
@@ -41,8 +43,7 @@ AWHDMainModule::AWHDMainModule()
 	ModuleClasses.Add(ADebugModule::StaticClass());
 	ModuleClasses.Add(AEventModule::StaticClass());
 	ModuleClasses.Add(AFSMModule::StaticClass());
-	ModuleClasses.Add(AInputModule::StaticClass());
-	ModuleClasses.Add(ALatentActionModule::StaticClass());
+	ModuleClasses.Add(AWHDInputModule::StaticClass());
 	ModuleClasses.Add(AMediaModule::StaticClass());
 	ModuleClasses.Add(ANetworkModule::StaticClass());
 	ModuleClasses.Add(AObjectPoolModule::StaticClass());

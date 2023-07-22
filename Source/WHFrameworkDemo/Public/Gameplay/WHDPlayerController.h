@@ -16,7 +16,7 @@ class WHFRAMEWORKDEMO_API AWHDPlayerController : public AWHPlayerController, pub
 	GENERATED_BODY()
 
 	friend class ADWCharacter;
-	friend class ADWPlayerCharacter;
+	friend class AWHDPlayerCharacter;
 
 public:
 	AWHDPlayerController();
