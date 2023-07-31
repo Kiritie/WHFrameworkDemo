@@ -37,7 +37,8 @@ void AWHDPlayerCharacter::OnRefresh_Implementation(float DeltaSeconds)
 	if(bFloorToChunk && GetActorLocation().Z <= 0.f && AVoxelModule::Get()->IsBasicGenerated())
 	{
 		FHitResult HitResult;
-		if(UVoxelModuleBPLibrary::VoxelAgentTraceSingle(GetActorLocation(), FVector2D(UVoxelModuleBPLibrary::GetWorldData().GetChunkRealSize().X, UVoxelModuleBPLibrary::GetWorldData().GetChunkRealSize().Y), GetCapsuleComponent()->GetScaledCapsuleRadius(), GetCapsuleComponent()->GetScaledCapsuleHalfHeight(), {}, HitResult, false, 10, true))
+		const FVector ChunkSize = UVoxelModuleBPLibrary::GetWorldData().GetChunkRealSize();
+		if(UVoxelModuleBPLibrary::VoxelAgentTraceSingle(GetActorLocation(), FVector2D(ChunkSize.X, ChunkSize.Y), GetCapsuleComponent()->GetScaledCapsuleRadius(), GetCapsuleComponent()->GetScaledCapsuleHalfHeight(), {}, HitResult, false, 10, true))
 		{
 			SetActorLocation(HitResult.Location);
 			GetMovementComponent()->SetActive(true);

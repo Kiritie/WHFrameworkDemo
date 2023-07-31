@@ -16,6 +16,7 @@
 #include "Voxel/Datas/VoxelData.h"
 #include "Widget/WidgetModuleBPLibrary.h"
 #include "SaveGame/SaveGameModuleBPLibrary.h"
+#include "SaveGame/General/WHDVoxelSaveGame.h"
 #include "UObject/ConstructorHelpers.h"
 	
 IMPLEMENTATION_MODULE(AWHDVoxelModule)
@@ -51,6 +52,18 @@ void AWHDVoxelModule::OnInitialize_Implementation()
 void AWHDVoxelModule::OnPreparatory_Implementation(EPhase InPhase)
 {
 	Super::OnPreparatory_Implementation(InPhase);
+
+	if(InPhase == EPhase::Final)
+	{
+		if(!USaveGameModuleBPLibrary::GetSaveGame<UWHDVoxelSaveGame>()->IsSaved())
+		{
+			LoadSaveData(NewData(true), EPhase::Primary);
+		}
+		else
+		{
+			LoadSaveData(USaveGameModuleBPLibrary::GetSaveGame<UWHDVoxelSaveGame>()->GetSaveData(), EPhase::Primary);
+		}
+	}
 }
 
 void AWHDVoxelModule::OnRefresh_Implementation(float DeltaSeconds)
@@ -116,11 +129,6 @@ void AWHDVoxelModule::GenerateChunk(FIndex InIndex)
 void AWHDVoxelModule::DestroyChunk(FIndex InIndex)
 {
 	Super::DestroyChunk(InIndex);
-}
-
-AVoxelChunk* AWHDVoxelModule::SpawnChunk(FIndex InIndex, bool bAddToQueue)
-{
-	return Super::SpawnChunk(InIndex, bAddToQueue);
 }
 
 ECollisionChannel AWHDVoxelModule::GetChunkTraceType() const

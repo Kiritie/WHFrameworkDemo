@@ -8,7 +8,6 @@
 #include "Voxel/Chunks/VoxelChunk.h"
 #include "WHDVoxelChunk.generated.h"
 
-class ADWVitality;
 class UVoxel;
 class AAbilityPickUpBase;
 class UVoxelMeshComponent;

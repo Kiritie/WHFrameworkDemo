@@ -25,7 +25,8 @@ void AWHDRoamCameraPawn::OnRefresh_Implementation(float DeltaSeconds)
 	if(bFloorToChunk && GetActorLocation().Z == 0.f && AVoxelModule::Get()->IsBasicGenerated())
 	{
 		FHitResult HitResult;
-		if(UVoxelModuleBPLibrary::VoxelAgentTraceSingle(GetActorLocation(), FVector2D(UVoxelModuleBPLibrary::GetWorldData().GetChunkRealSize().X, UVoxelModuleBPLibrary::GetWorldData().GetChunkRealSize().Y), Sphere->GetScaledSphereRadius(), Sphere->GetScaledSphereRadius(), {}, HitResult, false, 10, true))
+		const FVector ChunkSize = UVoxelModuleBPLibrary::GetWorldData().GetChunkRealSize();
+		if(UVoxelModuleBPLibrary::VoxelAgentTraceSingle(GetActorLocation(), FVector2D(ChunkSize.X, ChunkSize.Y), Sphere->GetScaledSphereRadius(), Sphere->GetScaledSphereRadius(), {}, HitResult, false, 10, true))
 		{
 			UCameraModuleBPLibrary::SetCameraLocation(HitResult.Location);
 		}
