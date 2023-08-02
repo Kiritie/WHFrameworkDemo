@@ -38,10 +38,10 @@ void AWHDVoxelChunk::LoadData(FSaveData* InSaveData, EPhase InPhase)
 {
 	Super::LoadData(InSaveData, InPhase);
 }
- 
-FSaveData* AWHDVoxelChunk::ToData()
+
+FSaveData* AWHDVoxelChunk::ToData(bool bRefresh)
 {
-	return Super::ToData();
+	return Super::ToData(bRefresh);
 }
 
 void AWHDVoxelChunk::OnCollision(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)

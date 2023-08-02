@@ -14,7 +14,7 @@ IMPLEMENTATION_MODULE(AWHDSaveGameModule)
 // ParamSets default values
 AWHDSaveGameModule::AWHDSaveGameModule()
 {
-	
+	GeneralSaveGame = UWHDVoxelSaveGame::StaticClass();
 }
 
 AWHDSaveGameModule::~AWHDSaveGameModule()
@@ -69,7 +69,7 @@ void AWHDSaveGameModule::LoadData(FSaveData* InSaveData, EPhase InPhase)
 	Super::LoadData(InSaveData, InPhase);
 }
 
-FSaveData* AWHDSaveGameModule::ToData()
+FSaveData* AWHDSaveGameModule::ToData(bool bRefresh)
 {
-	return Super::ToData();
+	return Super::ToData(bRefresh);
 }

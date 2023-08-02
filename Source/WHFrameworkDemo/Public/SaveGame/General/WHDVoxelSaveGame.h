@@ -7,8 +7,6 @@
 
 #include "WHDVoxelSaveGame.generated.h"
 
-class UDWArchiveSaveGame;
-
 /**
  * 常规游戏数据存取类
  */
@@ -29,18 +27,18 @@ public:
 
 	virtual void OnRefresh_Implementation() override;
 
-// protected:
-// 	UPROPERTY()
-// 	FWHDVoxelSaveData WHDVoxelSaveData;
-//
-// public:
-// 	virtual FSaveData* GetSaveData() override { return &WHDVoxelSaveData; }
-//
-// 	virtual void SetSaveData(FSaveData* InSaveData) override { WHDVoxelSaveData = InSaveData->CastRef<FWHDVoxelSaveData>(); }
-//
-// 	UFUNCTION(BlueprintPure, meta = (DisplayName = "GetSaveData"))
-// 	FWHDVoxelSaveData& K2_GetSaveData() { return WHDVoxelSaveData; }
-//
-// 	UFUNCTION(BlueprintCallable, meta = (DisplayName = "SetSaveData"))
-// 	void K2_SetSaveData(const FWHDVoxelSaveData& InSaveData) { this->WHDVoxelSaveData = InSaveData; }
+protected:
+	UPROPERTY()
+	FWHDVoxelSaveData WHDVoxelSaveData;
+
+public:
+	virtual FSaveData* GetSaveData() override { return &WHDVoxelSaveData; }
+
+	virtual void SetSaveData(FSaveData* InSaveData) override { WHDVoxelSaveData = InSaveData->CastRef<FWHDVoxelSaveData>(); }
+
+	UFUNCTION(BlueprintPure, meta = (DisplayName = "GetSaveData"))
+	FWHDVoxelSaveData& K2_GetSaveData() { return WHDVoxelSaveData; }
+
+	UFUNCTION(BlueprintCallable, meta = (DisplayName = "SetSaveData"))
+	void K2_SetSaveData(const FWHDVoxelSaveData& InSaveData) { this->WHDVoxelSaveData = InSaveData; }
 };

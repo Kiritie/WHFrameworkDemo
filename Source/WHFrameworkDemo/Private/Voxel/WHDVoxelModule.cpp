@@ -91,9 +91,9 @@ void AWHDVoxelModule::LoadData(FSaveData* InSaveData, EPhase InPhase)
 	Super::LoadData(InSaveData, InPhase);
 }
 
-FSaveData* AWHDVoxelModule::ToData()
+FSaveData* AWHDVoxelModule::ToData(bool bRefresh)
 {
-	return Super::ToData();
+	return Super::ToData(bRefresh);
 }
 
 void AWHDVoxelModule::UnloadData(EPhase InPhase)

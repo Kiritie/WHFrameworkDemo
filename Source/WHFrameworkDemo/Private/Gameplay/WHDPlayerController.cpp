@@ -61,7 +61,7 @@ void AWHDPlayerController::LoadData(FSaveData* InSaveData, EPhase InPhase)
 {
 }
 
-FSaveData* AWHDPlayerController::ToData()
+FSaveData* AWHDPlayerController::ToData(bool bRefresh)
 {
 	return nullptr;
 }
