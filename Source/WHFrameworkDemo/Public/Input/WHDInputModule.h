@@ -41,7 +41,7 @@ public:
 public:
 	virtual FEventReply OnWidgetInputKeyDown_Implementation(const FGeometry& InGeometry, const FKeyEvent& InKeyEvent) override;
 
-	virtual FEventReply OnWidgetInputMouseButtonDown_Implementation(const FGeometry& InGeometry, const FPointerEvent& InMouseEvent) override;
+	virtual FEventReply OnWidgetInputKeyUp_Implementation(const FGeometry& InGeometry, const FKeyEvent& InKeyEvent) override;
 
 protected:
 	UFUNCTION()

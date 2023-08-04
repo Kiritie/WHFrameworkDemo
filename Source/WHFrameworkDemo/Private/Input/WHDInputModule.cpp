@@ -87,17 +87,12 @@ void AWHDInputModule::OnUnPause_Implementation()
 
 FEventReply AWHDInputModule::OnWidgetInputKeyDown_Implementation(const FGeometry& InGeometry, const FKeyEvent& InKeyEvent)
 {
-	if(InKeyEvent.GetKey() == FKey("S") && InKeyEvent.IsLeftControlDown())
-	{
-		WHDebug(TEXT("保存成功！"));
-		return FEventReply(true);
-	}
 	return Super::OnWidgetInputKeyDown_Implementation(InGeometry, InKeyEvent);
 }
 
-FEventReply AWHDInputModule::OnWidgetInputMouseButtonDown_Implementation(const FGeometry& InGeometry, const FPointerEvent& InMouseEvent)
+FEventReply AWHDInputModule::OnWidgetInputKeyUp_Implementation(const FGeometry& InGeometry, const FKeyEvent& InKeyEvent)
 {
-	return Super::OnWidgetInputMouseButtonDown_Implementation(InGeometry, InMouseEvent);
+	return Super::OnWidgetInputKeyUp_Implementation(InGeometry, InKeyEvent);
 }
 
 void AWHDInputModule::OnJumpPressed(FKey Key)
@@ -120,7 +115,7 @@ void AWHDInputModule::OnJumpReleased()
 
 void AWHDInputModule::OnPrimaryPressed()
 {
-	AWHDPlayerCharacter* PlayerCharacter = UGlobalBPLibrary::GetPlayerCharacter<AWHDPlayerCharacter>();
+	AWHDPlayerCharacter* PlayerCharacter = UGlobalBPLibrary::GetPlayerPawn<AWHDPlayerCharacter>();
 
 	if(!PlayerCharacter) return;
 
@@ -137,7 +132,7 @@ void AWHDInputModule::OnPrimaryReleased()
 
 void AWHDInputModule::OnMinorPressed()
 {
-	AWHDPlayerCharacter* PlayerCharacter = UGlobalBPLibrary::GetPlayerCharacter<AWHDPlayerCharacter>();
+	AWHDPlayerCharacter* PlayerCharacter = UGlobalBPLibrary::GetPlayerPawn<AWHDPlayerCharacter>();
 
 	if(!PlayerCharacter) return;
 

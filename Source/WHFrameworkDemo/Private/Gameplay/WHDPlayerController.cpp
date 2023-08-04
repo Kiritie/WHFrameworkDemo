@@ -52,9 +52,9 @@ void AWHDPlayerController::OnRefresh_Implementation(float DeltaSeconds)
 	Super::OnRefresh_Implementation(DeltaSeconds);
 }
 
-void AWHDPlayerController::OnTermination_Implementation()
+void AWHDPlayerController::OnTermination_Implementation(EPhase InPhase)
 {
-	Super::OnTermination_Implementation();
+	Super::OnTermination_Implementation(InPhase);
 }
 
 void AWHDPlayerController::LoadData(FSaveData* InSaveData, EPhase InPhase)

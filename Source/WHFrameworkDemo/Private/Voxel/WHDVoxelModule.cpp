@@ -16,7 +16,6 @@
 #include "Voxel/Datas/VoxelData.h"
 #include "Widget/WidgetModuleBPLibrary.h"
 #include "SaveGame/SaveGameModuleBPLibrary.h"
-#include "SaveGame/General/WHDVoxelSaveGame.h"
 #include "UObject/ConstructorHelpers.h"
 	
 IMPLEMENTATION_MODULE(AWHDVoxelModule)
@@ -52,18 +51,6 @@ void AWHDVoxelModule::OnInitialize_Implementation()
 void AWHDVoxelModule::OnPreparatory_Implementation(EPhase InPhase)
 {
 	Super::OnPreparatory_Implementation(InPhase);
-
-	if(InPhase == EPhase::Final)
-	{
-		if(!USaveGameModuleBPLibrary::GetSaveGame<UWHDVoxelSaveGame>()->IsSaved())
-		{
-			LoadSaveData(NewData(true), EPhase::Primary);
-		}
-		else
-		{
-			LoadSaveData(USaveGameModuleBPLibrary::GetSaveGame<UWHDVoxelSaveGame>()->GetSaveData(), EPhase::Primary);
-		}
-	}
 }
 
 void AWHDVoxelModule::OnRefresh_Implementation(float DeltaSeconds)
@@ -81,9 +68,9 @@ void AWHDVoxelModule::OnUnPause_Implementation()
 	Super::OnUnPause_Implementation();
 }
 
-void AWHDVoxelModule::OnTermination_Implementation()
+void AWHDVoxelModule::OnTermination_Implementation(EPhase InPhase)
 {
-	Super::OnTermination_Implementation();
+	Super::OnTermination_Implementation(InPhase);
 }
 
 void AWHDVoxelModule::LoadData(FSaveData* InSaveData, EPhase InPhase)

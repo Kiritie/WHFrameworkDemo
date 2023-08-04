@@ -30,12 +30,12 @@ public:
 
 	virtual void OnRefresh_Implementation(float DeltaSeconds) override;
 
-	virtual void OnTermination_Implementation() override;
+	virtual void OnTermination_Implementation(EPhase InPhase) override;
 
 protected:
-	virtual void LoadData(FSaveData* InSaveData, EPhase InPhase = EPhase::Final) override;
+	virtual void LoadData(FSaveData* InSaveData, EPhase InPhase) override;
 
 	virtual FSaveData* ToData(bool bRefresh) override;
 
-	virtual void UnloadData(EPhase InPhase = EPhase::Final) override;
+	virtual void UnloadData(EPhase InPhase) override;
 };
