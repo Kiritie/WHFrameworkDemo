@@ -118,12 +118,12 @@ void AWHDVoxelModule::DestroyChunk(FIndex InIndex)
 	Super::DestroyChunk(InIndex);
 }
 
-ECollisionChannel AWHDVoxelModule::GetChunkTraceType() const
+ECollisionChannel AWHDVoxelModule::GetChunkTraceChannel() const
 {
 	return ECollisionChannel::ECC_GameTraceChannel9;
 }
 
-ECollisionChannel AWHDVoxelModule::GetVoxelTraceType() const
+ECollisionChannel AWHDVoxelModule::GetVoxelTraceChannel() const
 {
 	return ECollisionChannel::ECC_GameTraceChannel10;
 }

@@ -54,7 +54,7 @@ public:
 
 	virtual void LoadActors(FSaveData* InSaveData) override;
 
-	virtual void GenerateActors() override;
+	virtual void CreateActors() override;
 
 	virtual void DestroyActors() override;
 

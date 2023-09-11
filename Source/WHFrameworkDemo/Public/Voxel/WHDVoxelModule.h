@@ -68,7 +68,7 @@ public:
 	virtual void DestroyChunk(FIndex InIndex) override;
 
 public:
-	virtual ECollisionChannel GetChunkTraceType() const override;
-
-	virtual ECollisionChannel GetVoxelTraceType() const override;
+	virtual ECollisionChannel GetChunkTraceChannel() const override;
+	
+	virtual ECollisionChannel GetVoxelTraceChannel() const override;
 };

@@ -89,9 +89,9 @@ void AWHDVoxelChunk::LoadActors(FSaveData* InSaveData)
 	Super::LoadActors(InSaveData);
 }
 
-void AWHDVoxelChunk::GenerateActors()
+void AWHDVoxelChunk::CreateActors()
 {
-	Super::GenerateActors();
+	Super::CreateActors();
 }
 
 void AWHDVoxelChunk::DestroyActors()

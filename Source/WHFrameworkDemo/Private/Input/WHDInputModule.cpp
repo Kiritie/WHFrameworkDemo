@@ -122,7 +122,7 @@ void AWHDInputModule::OnPrimaryPressed()
 	FVoxelHitResult voxelHitResult;
 	if(UVoxelModuleBPLibrary::VoxelRaycastSinge(VoxelRaycastType, 100000.f, {}, voxelHitResult))
 	{
-		voxelHitResult.GetVoxel().OnActionTrigger(PlayerCharacter, EVoxelActionType::Action1, voxelHitResult);
+		voxelHitResult.GetVoxel().OnAgentAction(PlayerCharacter, EVoxelActionType::Action1, voxelHitResult);
 	}
 }
 
@@ -139,7 +139,7 @@ void AWHDInputModule::OnMinorPressed()
 	FVoxelHitResult voxelHitResult;
 	if(UVoxelModuleBPLibrary::VoxelRaycastSinge(VoxelRaycastType, 100000.f, {}, voxelHitResult))
 	{
-		voxelHitResult.GetVoxel().OnActionTrigger(PlayerCharacter, EVoxelActionType::Action2, voxelHitResult);
+		voxelHitResult.GetVoxel().OnAgentAction(PlayerCharacter, EVoxelActionType::Action2, voxelHitResult);
 	}
 }
 
