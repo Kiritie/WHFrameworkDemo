@@ -51,16 +51,16 @@ protected:
 	virtual void OnJumpReleased();
 
 	UFUNCTION()
-	virtual void OnPrimaryPressed();
+	virtual void OnAction1Pressed();
 
 	UFUNCTION()
-	virtual void OnPrimaryReleased();
+	virtual void OnAction1Released();
 
 	UFUNCTION()
-	virtual void OnMinorPressed();
+	virtual void OnAction2Pressed();
 
 	UFUNCTION()
-	virtual void OnMinorReleased();
+	virtual void OnAction2Released();
 
 	UFUNCTION()
 	virtual void PrevInventorySlot();

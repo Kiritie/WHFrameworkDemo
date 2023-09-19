@@ -36,11 +36,11 @@ AWHDInputModule::AWHDInputModule()
 	ActionMappings.Add(FInputActionMapping("Jump", IE_Pressed, this, "OnJumpPressed"));
 	ActionMappings.Add(FInputActionMapping("Jump", IE_Released, this, "OnJumpReleased"));
 
-	ActionMappings.Add(FInputActionMapping("Primary", IE_Pressed, this, "OnPrimaryPressed"));
-	ActionMappings.Add(FInputActionMapping("Primary", IE_Released, this, "OnPrimaryReleased"));
+	ActionMappings.Add(FInputActionMapping("Action1", IE_Pressed, this, "OnAction1Pressed"));
+	ActionMappings.Add(FInputActionMapping("Action1", IE_Released, this, "OnAction1Released"));
 
-	ActionMappings.Add(FInputActionMapping("Minor", IE_Pressed, this, "OnMinorPressed"));
-	ActionMappings.Add(FInputActionMapping("Minor", IE_Released, this, "OnMinorReleased"));
+	ActionMappings.Add(FInputActionMapping("Action2", IE_Pressed, this, "OnAction2Pressed"));
+	ActionMappings.Add(FInputActionMapping("Action2", IE_Released, this, "OnAction2Released"));
 
 	ActionMappings.Add(FInputActionMapping("PrevInventorySlot", IE_Pressed, this, "PrevInventorySlot"));
 	ActionMappings.Add(FInputActionMapping("NextInventorySlot", IE_Pressed, this, "NextInventorySlot"));
@@ -113,7 +113,7 @@ void AWHDInputModule::OnJumpReleased()
 	// PlayerCharacter->UnJump();
 }
 
-void AWHDInputModule::OnPrimaryPressed()
+void AWHDInputModule::OnAction1Pressed()
 {
 	AWHDPlayerCharacter* PlayerCharacter = UGlobalBPLibrary::GetPlayerPawn<AWHDPlayerCharacter>();
 
@@ -122,15 +122,15 @@ void AWHDInputModule::OnPrimaryPressed()
 	FVoxelHitResult voxelHitResult;
 	if(UVoxelModuleBPLibrary::VoxelRaycastSinge(VoxelRaycastType, 100000.f, {}, voxelHitResult))
 	{
-		voxelHitResult.GetVoxel().OnAgentAction(PlayerCharacter, EVoxelActionType::Action1, voxelHitResult);
+		voxelHitResult.GetVoxel().OnAgentInteract(PlayerCharacter, EInputInteractAction::Action1, voxelHitResult);
 	}
 }
 
-void AWHDInputModule::OnPrimaryReleased()
+void AWHDInputModule::OnAction1Released()
 {
 }
 
-void AWHDInputModule::OnMinorPressed()
+void AWHDInputModule::OnAction2Pressed()
 {
 	AWHDPlayerCharacter* PlayerCharacter = UGlobalBPLibrary::GetPlayerPawn<AWHDPlayerCharacter>();
 
@@ -139,11 +139,11 @@ void AWHDInputModule::OnMinorPressed()
 	FVoxelHitResult voxelHitResult;
 	if(UVoxelModuleBPLibrary::VoxelRaycastSinge(VoxelRaycastType, 100000.f, {}, voxelHitResult))
 	{
-		voxelHitResult.GetVoxel().OnAgentAction(PlayerCharacter, EVoxelActionType::Action2, voxelHitResult);
+		voxelHitResult.GetVoxel().OnAgentInteract(PlayerCharacter, EInputInteractAction::Action2, voxelHitResult);
 	}
 }
 
-void AWHDInputModule::OnMinorReleased()
+void AWHDInputModule::OnAction2Released()
 {
 }
 
