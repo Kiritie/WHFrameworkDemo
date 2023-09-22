@@ -2,8 +2,7 @@
 
 #pragma once
 
-#include "Character/Base/CharacterBase.h"
-#include "Gameplay/WHPlayerInterface.h"
+#include "Ability/Character/AbilityCharacterBase.h"
 #include "WHDPlayerCharacter.generated.h"
 
 class UVoxel;
@@ -16,7 +15,7 @@ class USkeletalMeshComponent;
  * ��ҽ�ɫ
  */
 UCLASS()
-class WHFRAMEWORKDEMO_API AWHDPlayerCharacter : public ACharacterBase
+class WHFRAMEWORKDEMO_API AWHDPlayerCharacter : public AAbilityCharacterBase
 {
 	GENERATED_BODY()
 
@@ -29,11 +28,17 @@ public:
 	virtual void OnRefresh_Implementation(float DeltaSeconds) override;
 
 protected:
-	virtual void OnSpawn_Implementation(const TArray<FParameter>& InParams) override;
+	virtual bool CanInteract(EInteractAction InInteractAction, IInteractionAgentInterface* InInteractionAgent) override;
 
-	virtual void OnDespawn_Implementation(bool bRecovery) override;
+	virtual void OnEnterInteract(IInteractionAgentInterface* InInteractionAgent) override;
+
+	virtual void OnLeaveInteract(IInteractionAgentInterface* InInteractionAgent) override;
 	
+	virtual void OnInteract(EInteractAction InInteractAction, IInteractionAgentInterface* InInteractionAgent, bool bPassivity) override;
+
+	virtual bool OnInteractVoxel(const FVoxelHitResult& InVoxelHitResult, EInputInteractAction InInteractAction) override;
+
 protected:
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "CharacterStats")
+	UPROPERTY(EditAnywhere, Category = "CharacterStats")
 	bool bFloorToChunk;
 };

@@ -1,25 +1,24 @@
-// Copyright 1998-2019 Epic Games, Inc. All Rights Reserved.
+// Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
 
-#include "Main/MainModule.h"
+#include "CoreMinimal.h"
+#include "Ability/AbilityModule.h"
 
-#include "WHDMainModule.generated.h"
+#include "WHDAbilityModule.generated.h"
 
-/**
- * 
- */
 UCLASS()
-class WHFRAMEWORKDEMO_API AWHDMainModule : public AMainModule
+class WHFRAMEWORKDEMO_API AWHDAbilityModule : public AAbilityModule
 {
 	GENERATED_BODY()
 		
-	GENERATED_MAIN_MODULE(AWHDMainModule)
+	GENERATED_MODULE(AWHDAbilityModule)
 
-public:
-	AWHDMainModule();
-
-	~AWHDMainModule();
+public:	
+	// ParamSets default values for this actor's properties
+	AWHDAbilityModule();
+	
+	~AWHDAbilityModule();
 	
 	//////////////////////////////////////////////////////////////////////////
 	/// Module
@@ -29,7 +28,7 @@ public:
 
 	virtual void OnDestroy() override;
 #endif
-	
+
 	virtual void OnInitialize_Implementation() override;
 
 	virtual void OnPreparatory_Implementation(EPhase InPhase) override;
@@ -40,5 +39,6 @@ public:
 
 	virtual void OnUnPause_Implementation() override;
 
-	virtual void OnTermination_Implementation(EPhase InPhase) override;
+public:
+	virtual ECollisionChannel GetPickUpTraceChannel() const override;
 };

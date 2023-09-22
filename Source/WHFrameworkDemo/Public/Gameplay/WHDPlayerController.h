@@ -3,7 +3,6 @@
 #pragma once
 
 #include "Gameplay/WHPlayerController.h"
-#include "SaveGame/Base/SaveDataInterface.h"
 
 #include "WHDPlayerController.generated.h"
 
@@ -11,12 +10,9 @@
  * 玩家角色控制器
  */
 UCLASS()
-class WHFRAMEWORKDEMO_API AWHDPlayerController : public AWHPlayerController, public ISaveDataInterface
+class WHFRAMEWORKDEMO_API AWHDPlayerController : public AWHPlayerController
 {
 	GENERATED_BODY()
-
-	friend class ADWCharacter;
-	friend class AWHDPlayerCharacter;
 
 public:
 	AWHDPlayerController();
@@ -31,11 +27,4 @@ public:
 	virtual void OnRefresh_Implementation(float DeltaSeconds) override;
 
 	virtual void OnTermination_Implementation(EPhase InPhase) override;
-
-protected:
-	virtual void LoadData(FSaveData* InSaveData, EPhase InPhase) override;
-
-	virtual FSaveData* ToData(bool bRefresh) override;
-
-	virtual void UnloadData(EPhase InPhase) override;
 };

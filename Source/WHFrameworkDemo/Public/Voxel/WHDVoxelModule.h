@@ -42,30 +42,6 @@ public:
 	virtual void OnUnPause_Implementation() override;
 
 	virtual void OnTermination_Implementation(EPhase InPhase) override;
-	
-protected:
-	virtual void LoadData(FSaveData* InSaveData, EPhase InPhase) override;
-
-	virtual FSaveData* ToData(bool bRefresh) override;
-
-	virtual void UnloadData(EPhase InPhase) override;
-
-	//////////////////////////////////////////////////////////////////////////
-	// World
-protected:
-	virtual void OnWorldStateChanged() override;
-
-protected:
-	virtual void GenerateWorld() override;
-
-public:
-	virtual void BuildChunkMap(FIndex InIndex, int32 InStage) override;
-
-	virtual void BuildChunkMesh(FIndex InIndex) override;
-
-	virtual void GenerateChunk(FIndex InIndex) override;
-
-	virtual void DestroyChunk(FIndex InIndex) override;
 
 public:
 	virtual ECollisionChannel GetChunkTraceChannel() const override;

@@ -38,11 +38,6 @@ public:
 
 	virtual void OnUnPause_Implementation() override;
 
-public:
-	virtual FEventReply OnWidgetInputKeyDown_Implementation(const FGeometry& InGeometry, const FKeyEvent& InKeyEvent) override;
-
-	virtual FEventReply OnWidgetInputKeyUp_Implementation(const FGeometry& InGeometry, const FKeyEvent& InKeyEvent) override;
-
 protected:
 	UFUNCTION()
 	virtual void OnJumpPressed(FKey Key);
@@ -61,6 +56,21 @@ protected:
 
 	UFUNCTION()
 	virtual void OnAction2Released();
+
+	UFUNCTION()
+	virtual void DoInteractAction1();
+
+	UFUNCTION()
+	virtual void DoInteractAction2();
+
+	UFUNCTION()
+	virtual void DoInteractAction3();
+
+	UFUNCTION()
+	virtual void DoInteractAction4();
+
+	UFUNCTION()
+	virtual void DoInteractAction5();
 
 	UFUNCTION()
 	virtual void PrevInventorySlot();

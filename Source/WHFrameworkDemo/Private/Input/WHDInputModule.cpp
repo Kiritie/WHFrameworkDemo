@@ -2,28 +2,14 @@
 
 
 #include "Input/WHDInputModule.h"
-
-#include "Ability/Components/CharacterInteractionComponent.h"
-#include "Ability/Inventory/CharacterInventory.h"
-#include "Ability/Inventory/Slot/InventorySlot.h"
 #include "Camera/CameraModule.h"
 #include "Character/WHDPlayerCharacter.h"
+#include "Common/CommonBPLibrary.h"
 #include "GameFramework/CharacterMovementComponent.h"
-#include "GameFramework/PawnMovementComponent.h"
-#include "GameFramework/SpringArmComponent.h"
-#include "Gameplay/WHPlayerInterface.h"
-#include "Global/GlobalBPLibrary.h"
 #include "Input/InputModule.h"
 #include "Input/InputModuleBPLibrary.h"
 #include "Kismet/GameplayStatics.h"
 #include "Kismet/KismetMathLibrary.h"
-#include "Main/MainModule.h"
-#include "Math/MathBPLibrary.h"
-#include "Media/MediaModuleNetworkComponent.h"
-#include "Network/NetworkModuleNetworkComponent.h"
-#include "Procedure/ProcedureModule.h"
-#include "Procedure/ProcedureModuleBPLibrary.h"
-#include "Procedure/ProcedureModuleNetworkComponent.h"
 #include "Voxel/VoxelModuleBPLibrary.h"
 #include "Voxel/Voxels/Voxel.h"
 #include "Widget/WidgetModuleBPLibrary.h"
@@ -41,6 +27,12 @@ AWHDInputModule::AWHDInputModule()
 
 	ActionMappings.Add(FInputActionMapping("Action2", IE_Pressed, this, "OnAction2Pressed"));
 	ActionMappings.Add(FInputActionMapping("Action2", IE_Released, this, "OnAction2Released"));
+	
+	ActionMappings.Add(FInputActionMapping("Interact1", IE_Pressed, this, "DoInteractAction1"));
+	ActionMappings.Add(FInputActionMapping("Interact2", IE_Pressed, this, "DoInteractAction2"));
+	ActionMappings.Add(FInputActionMapping("Interact3", IE_Pressed, this, "DoInteractAction3"));
+	ActionMappings.Add(FInputActionMapping("Interact4", IE_Pressed, this, "DoInteractAction4"));
+	ActionMappings.Add(FInputActionMapping("Interact5", IE_Pressed, this, "DoInteractAction5"));
 
 	ActionMappings.Add(FInputActionMapping("PrevInventorySlot", IE_Pressed, this, "PrevInventorySlot"));
 	ActionMappings.Add(FInputActionMapping("NextInventorySlot", IE_Pressed, this, "NextInventorySlot"));
@@ -85,19 +77,9 @@ void AWHDInputModule::OnUnPause_Implementation()
 	Super::OnUnPause_Implementation();
 }
 
-FEventReply AWHDInputModule::OnWidgetInputKeyDown_Implementation(const FGeometry& InGeometry, const FKeyEvent& InKeyEvent)
-{
-	return Super::OnWidgetInputKeyDown_Implementation(InGeometry, InKeyEvent);
-}
-
-FEventReply AWHDInputModule::OnWidgetInputKeyUp_Implementation(const FGeometry& InGeometry, const FKeyEvent& InKeyEvent)
-{
-	return Super::OnWidgetInputKeyUp_Implementation(InGeometry, InKeyEvent);
-}
-
 void AWHDInputModule::OnJumpPressed(FKey Key)
 {
-	AWHDPlayerCharacter* PlayerCharacter = UGlobalBPLibrary::GetPlayerPawn<AWHDPlayerCharacter>();
+	AWHDPlayerCharacter* PlayerCharacter = UCommonBPLibrary::GetPlayerPawn<AWHDPlayerCharacter>();
 
 	if(!PlayerCharacter) return;
 
@@ -106,7 +88,7 @@ void AWHDInputModule::OnJumpPressed(FKey Key)
 
 void AWHDInputModule::OnJumpReleased()
 {
-	AWHDPlayerCharacter* PlayerCharacter = UGlobalBPLibrary::GetPlayerPawn<AWHDPlayerCharacter>();
+	AWHDPlayerCharacter* PlayerCharacter = UCommonBPLibrary::GetPlayerPawn<AWHDPlayerCharacter>();
 
 	if(!PlayerCharacter) return;
 
@@ -115,7 +97,7 @@ void AWHDInputModule::OnJumpReleased()
 
 void AWHDInputModule::OnAction1Pressed()
 {
-	AWHDPlayerCharacter* PlayerCharacter = UGlobalBPLibrary::GetPlayerPawn<AWHDPlayerCharacter>();
+	AWHDPlayerCharacter* PlayerCharacter = UCommonBPLibrary::GetPlayerPawn<AWHDPlayerCharacter>();
 
 	if(!PlayerCharacter) return;
 
@@ -132,7 +114,7 @@ void AWHDInputModule::OnAction1Released()
 
 void AWHDInputModule::OnAction2Pressed()
 {
-	AWHDPlayerCharacter* PlayerCharacter = UGlobalBPLibrary::GetPlayerPawn<AWHDPlayerCharacter>();
+	AWHDPlayerCharacter* PlayerCharacter = UCommonBPLibrary::GetPlayerPawn<AWHDPlayerCharacter>();
 
 	if(!PlayerCharacter) return;
 
@@ -145,6 +127,66 @@ void AWHDInputModule::OnAction2Pressed()
 
 void AWHDInputModule::OnAction2Released()
 {
+}
+
+void AWHDInputModule::DoInteractAction1()
+{
+	AWHDPlayerCharacter* PlayerCharacter = UCommonBPLibrary::GetPlayerPawn<AWHDPlayerCharacter>();
+	
+	if(!PlayerCharacter || !PlayerCharacter->GetInteractingAgent()) return;
+	
+	if(PlayerCharacter->GetInteractableActions().IsValidIndex(0))
+	{
+		PlayerCharacter->DoInteract(PlayerCharacter->GetInteractableActions()[0]);
+	}
+}
+
+void AWHDInputModule::DoInteractAction2()
+{
+	AWHDPlayerCharacter* PlayerCharacter = UCommonBPLibrary::GetPlayerPawn<AWHDPlayerCharacter>();
+	
+	if(!PlayerCharacter || !PlayerCharacter->GetInteractingAgent()) return;
+	
+	if(PlayerCharacter->GetInteractableActions().IsValidIndex(1))
+	{
+		PlayerCharacter->DoInteract(PlayerCharacter->GetInteractableActions()[1]);
+	}
+}
+
+void AWHDInputModule::DoInteractAction3()
+{
+	AWHDPlayerCharacter* PlayerCharacter = UCommonBPLibrary::GetPlayerPawn<AWHDPlayerCharacter>();
+	
+	if(!PlayerCharacter || !PlayerCharacter->GetInteractingAgent()) return;
+	
+	if(PlayerCharacter->GetInteractableActions().IsValidIndex(2))
+	{
+		PlayerCharacter->DoInteract(PlayerCharacter->GetInteractableActions()[2]);
+	}
+}
+
+void AWHDInputModule::DoInteractAction4()
+{
+	AWHDPlayerCharacter* PlayerCharacter = UCommonBPLibrary::GetPlayerPawn<AWHDPlayerCharacter>();
+	
+	if(!PlayerCharacter || !PlayerCharacter->GetInteractingAgent()) return;
+	
+	if(PlayerCharacter->GetInteractableActions().IsValidIndex(3))
+	{
+		PlayerCharacter->DoInteract(PlayerCharacter->GetInteractableActions()[3]);
+	}
+}
+
+void AWHDInputModule::DoInteractAction5()
+{
+	AWHDPlayerCharacter* PlayerCharacter = UCommonBPLibrary::GetPlayerPawn<AWHDPlayerCharacter>();
+	
+	if(!PlayerCharacter || !PlayerCharacter->GetInteractingAgent()) return;
+	
+	if(PlayerCharacter->GetInteractableActions().IsValidIndex(4))
+	{
+		PlayerCharacter->DoInteract(PlayerCharacter->GetInteractableActions()[4]);
+	}
 }
 
 void AWHDInputModule::PrevInventorySlot()

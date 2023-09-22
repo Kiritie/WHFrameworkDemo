@@ -2,21 +2,34 @@
 
 #include "Character/WHDPlayerCharacter.h"
 
+#include "Ability/Character/AbilityCharacterInventoryBase.h"
+#include "Ability/Components/AbilitySystemComponentBase.h"
 #include "Camera/CameraComponent.h"
+#include "Character/CharacterModuleBPLibrary.h"
+#include "Common/CommonBPLibrary.h"
+#include "Common/WHDCommonTypes.h"
+#include "Common/Interaction/InteractionComponent.h"
+#include "Common/Widgets/WHDWidgetCommonGameHUD.h"
 #include "Components/CapsuleComponent.h"
 #include "Components/SkeletalMeshComponent.h"
 #include "GameFramework/PawnMovementComponent.h"
-#include "GameFramework/SpringArmComponent.h"
 #include "Voxel/VoxelModule.h"
 #include "Voxel/VoxelModuleBPLibrary.h"
+#include "Voxel/Voxels/Auxiliary/VoxelInteractAuxiliary.h"
+#include "Widget/WidgetModuleBPLibrary.h"
 
 //////////////////////////////////////////////////////////////////////////
 // AWHDPlayerCharacter
 
 AWHDPlayerCharacter::AWHDPlayerCharacter()
 {
-	GetCapsuleComponent()->SetCapsuleHalfHeight(69.f);
-	GetCapsuleComponent()->SetCapsuleRadius(24.f);
+	AbilitySystem = CreateDefaultSubobject<UAbilitySystemComponentBase>(FName("AbilitySystem"));
+
+	AttributeSet = CreateDefaultSubobject<UCharacterAttributeSetBase>(FName("AttributeSet"));
+
+	Inventory = CreateDefaultSubobject<UAbilityCharacterInventoryBase>(FName("Inventory"));
+
+	Interaction->SetRelativeLocation(FVector(0.f, 0.f, -39.f));
 
 	GetMesh()->SetRelativeLocation(FVector(0.f, 0.f, -70.f));
 
@@ -27,7 +40,10 @@ void AWHDPlayerCharacter::OnInitialize_Implementation()
 {
 	Super::OnInitialize_Implementation();
 
-	GetMovementComponent()->SetActive(false);
+	if(bFloorToChunk)
+	{
+		GetMovementComponent()->SetActive(false);
+	}
 }
 
 void AWHDPlayerCharacter::OnRefresh_Implementation(float DeltaSeconds)
@@ -47,12 +63,92 @@ void AWHDPlayerCharacter::OnRefresh_Implementation(float DeltaSeconds)
 	}
 }
 
-void AWHDPlayerCharacter::OnSpawn_Implementation(const TArray<FParameter>& InParams)
+bool AWHDPlayerCharacter::CanInteract(EInteractAction InInteractAction, IInteractionAgentInterface* InInteractionAgent)
 {
-	Super::OnSpawn_Implementation(InParams);
+	switch (InInteractAction)
+	{
+		case EWHDInteractAction::Switch:
+		{
+			if(Cast<AWHDPlayerCharacter>(InInteractionAgent))
+			{
+				return true;
+			}
+		}
+		default: break;
+	}
+	return Super::CanInteract(InInteractAction, InInteractionAgent);
 }
 
-void AWHDPlayerCharacter::OnDespawn_Implementation(bool bRecovery)
+void AWHDPlayerCharacter::OnEnterInteract(IInteractionAgentInterface* InInteractionAgent)
 {
-	Super::OnDespawn_Implementation(bRecovery);
+	Super::OnEnterInteract(InInteractionAgent);
+
+	if(UCommonBPLibrary::GetPlayerPawn() == this)
+	{
+		if(UWidgetModuleBPLibrary::GetUserWidget<UWHDWidgetCommonGameHUD>())
+		{
+			UWidgetModuleBPLibrary::GetUserWidget<UWHDWidgetCommonGameHUD>()->ShowInteractActions(GetInteractableActions(InInteractionAgent));
+		}
+	}
+}
+
+void AWHDPlayerCharacter::OnLeaveInteract(IInteractionAgentInterface* InInteractionAgent)
+{
+	Super::OnLeaveInteract(InInteractionAgent);
+
+	if(UCommonBPLibrary::GetPlayerPawn() == this)
+	{
+		if(GetInteractingAgent() == InInteractionAgent && UWidgetModuleBPLibrary::GetUserWidget<UWHDWidgetCommonGameHUD>())
+		{
+			UWidgetModuleBPLibrary::GetUserWidget<UWHDWidgetCommonGameHUD>()->HideInteractActions();
+		}
+	}
+}
+
+void AWHDPlayerCharacter::OnInteract(EInteractAction InInteractAction, IInteractionAgentInterface* InInteractionAgent, bool bPassivity)
+{
+	Super::OnInteract(InInteractAction, InInteractionAgent, bPassivity);
+
+	if(bPassivity)
+	{
+		switch (InInteractAction)
+		{
+			case EWHDInteractAction::Switch:
+			{
+				UCharacterModuleBPLibrary::SwitchCharacter(this, true);
+				break;
+			}
+			default: break;
+		}
+	}
+	else
+	{
+		if(UWidgetModuleBPLibrary::GetUserWidget<UWHDWidgetCommonGameHUD>())
+		{
+			UWidgetModuleBPLibrary::GetUserWidget<UWHDWidgetCommonGameHUD>()->ShowInteractActions(GetInteractableActions(InInteractionAgent));
+		}
+	}
+}
+
+bool AWHDPlayerCharacter::OnInteractVoxel(const FVoxelHitResult& InVoxelHitResult, EInputInteractAction InInteractAction)
+{
+	if(UCommonBPLibrary::GetPlayerPawn() == this)
+	{
+		switch(InInteractAction)
+		{
+			case EInputInteractAction::Action2:
+			{
+				if(AVoxelInteractAuxiliary* InteractionAgent = Cast<AVoxelInteractAuxiliary>(InVoxelHitResult.VoxelItem.Auxiliary))
+				{
+					if(UWidgetModuleBPLibrary::GetUserWidget<UWHDWidgetCommonGameHUD>())
+					{
+						UWidgetModuleBPLibrary::GetUserWidget<UWHDWidgetCommonGameHUD>()->ShowInteractActions(GetInteractableActions(InteractionAgent));
+					}
+				}
+				break;
+			}
+			default: break;
+		}
+	}
+	return Super::OnInteractVoxel(InVoxelHitResult, InInteractAction);
 }

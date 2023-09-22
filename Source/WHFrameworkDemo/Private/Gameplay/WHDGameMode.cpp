@@ -1,14 +1,9 @@
 // Copyright 1998-2019 Epic Games, Inc. All Rights Reserved.
 
 #include "Gameplay/WHDGameMode.h"
-#include "Event/EventModuleBPLibrary.h"
 #include "Gameplay/WHDPlayerController.h"
 #include "Gameplay/WHDGameState.h"
-#include "Gameplay/WHDGameInstance.h"
 #include "Kismet/GameplayStatics.h"
-#include "Kismet/KismetSystemLibrary.h"
-#include "Main/MainModule.h"
-#include "Procedure/ProcedureModuleBPLibrary.h"
 #include "SaveGame/SaveGameModuleBPLibrary.h"
 
 AWHDGameMode::AWHDGameMode()

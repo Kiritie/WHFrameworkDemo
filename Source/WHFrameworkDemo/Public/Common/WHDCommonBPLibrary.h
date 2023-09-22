@@ -3,10 +3,10 @@
 #pragma once
 
 #include "Kismet/BlueprintFunctionLibrary.h"
-#include "WHDGlobalBPLibrary.generated.h"
+#include "WHDCommonBPLibrary.generated.h"
 
 UCLASS()
-class WHFRAMEWORKDEMO_API UWHDGlobalBPLibrary : public UBlueprintFunctionLibrary
+class WHFRAMEWORKDEMO_API UWHDCommonBPLibrary : public UBlueprintFunctionLibrary
 {
 	GENERATED_BODY()
 };

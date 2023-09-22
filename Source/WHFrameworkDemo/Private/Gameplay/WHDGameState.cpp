@@ -1,11 +1,7 @@
 // Copyright 1998-2019 Epic Games, Inc. All Rights Reserved.
 
 #include "Gameplay/WHDGameState.h"
-#include "Engine/World.h"
-#include "Gameplay/WHDGameInstance.h"
 #include "SaveGame/SaveGameModuleBPLibrary.h"
-#include "Voxel/WHDVoxelModule.h"
-#include "Widget/WidgetModuleBPLibrary.h"
 
 AWHDGameState::AWHDGameState()
 {
