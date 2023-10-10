@@ -17,10 +17,7 @@ class USkeletalMeshComponent;
 UCLASS()
 class WHFRAMEWORKDEMO_API AWHDPlayerCharacter : public AAbilityCharacterBase
 {
-	GENERATED_BODY()
-
-public:
-	AWHDPlayerCharacter();
+	GENERATED_UCLASS_BODY()
 
 public:
 	virtual void OnInitialize_Implementation() override;

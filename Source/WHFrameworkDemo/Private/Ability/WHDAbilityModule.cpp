@@ -34,14 +34,16 @@ void AWHDAbilityModule::OnDestroy()
 void AWHDAbilityModule::OnInitialize_Implementation()
 {
 	Super::OnInitialize_Implementation();
-	
-	UAbilityModuleBPLibrary::AddCustomInteractAction((int32)EWHDInteractAction::Enter, TEXT("/Script/WHFrameworkDemo.EWHDInteractAction"));
-	UAbilityModuleBPLibrary::AddCustomInteractAction((int32)EWHDInteractAction::Switch, TEXT("/Script/WHFrameworkDemo.EWHDInteractAction"));
 }
 
 void AWHDAbilityModule::OnPreparatory_Implementation(EPhase InPhase)
 {
 	Super::OnPreparatory_Implementation(InPhase);
+
+	if(PHASEC(InPhase, EPhase::Primary))
+	{
+		UAssetModuleBPLibrary::AddEnumMapping(TEXT("/Script/WHFramework.EInteractAction"), TEXT("/Script/WHFrameworkDemo.EWHDInteractAction"));
+	}
 }
 
 void AWHDAbilityModule::OnRefresh_Implementation(float DeltaSeconds)
