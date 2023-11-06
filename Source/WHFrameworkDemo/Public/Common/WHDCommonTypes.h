@@ -17,3 +17,10 @@ enum class EWHDInteractAction : uint8
 	// 切换
 	Switch = EInteractAction::Custom4 UMETA(DisplayName="切换")
 };
+
+namespace GameplayTags
+{
+	////////////////////////////////////////////////////
+	// Input_Player
+	WHFRAMEWORKDEMO_API	UE_DECLARE_GAMEPLAY_TAG_EXTERN(InputTag_Player_Jump);
+};

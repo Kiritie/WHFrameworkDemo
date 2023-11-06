@@ -5,38 +5,20 @@
 #include "Camera/CameraModule.h"
 #include "Character/WHDPlayerCharacter.h"
 #include "Common/CommonBPLibrary.h"
+#include "Common/WHDCommonTypes.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Input/InputModule.h"
 #include "Input/InputModuleBPLibrary.h"
-#include "Kismet/GameplayStatics.h"
+#include "Input/Components/InputComponentBase.h"
 #include "Kismet/KismetMathLibrary.h"
 #include "Voxel/VoxelModuleBPLibrary.h"
 #include "Voxel/Voxels/Voxel.h"
-#include "Widget/WidgetModuleBPLibrary.h"
 
 IMPLEMENTATION_MODULE(AWHDInputModule)
 
 // ParamSets default values
 AWHDInputModule::AWHDInputModule()
 {
-	ActionMappings.Add(FInputActionMapping("Jump", IE_Pressed, this, "OnJumpPressed"));
-	ActionMappings.Add(FInputActionMapping("Jump", IE_Released, this, "OnJumpReleased"));
-
-	ActionMappings.Add(FInputActionMapping("Action1", IE_Pressed, this, "OnAction1Pressed"));
-	ActionMappings.Add(FInputActionMapping("Action1", IE_Released, this, "OnAction1Released"));
-
-	ActionMappings.Add(FInputActionMapping("Action2", IE_Pressed, this, "OnAction2Pressed"));
-	ActionMappings.Add(FInputActionMapping("Action2", IE_Released, this, "OnAction2Released"));
-	
-	ActionMappings.Add(FInputActionMapping("Interact1", IE_Pressed, this, "DoInteractAction1"));
-	ActionMappings.Add(FInputActionMapping("Interact2", IE_Pressed, this, "DoInteractAction2"));
-	ActionMappings.Add(FInputActionMapping("Interact3", IE_Pressed, this, "DoInteractAction3"));
-	ActionMappings.Add(FInputActionMapping("Interact4", IE_Pressed, this, "DoInteractAction4"));
-	ActionMappings.Add(FInputActionMapping("Interact5", IE_Pressed, this, "DoInteractAction5"));
-
-	ActionMappings.Add(FInputActionMapping("PrevInventorySlot", IE_Pressed, this, "PrevInventorySlot"));
-	ActionMappings.Add(FInputActionMapping("NextInventorySlot", IE_Pressed, this, "NextInventorySlot"));
-
 	VoxelRaycastType = EVoxelRaycastType::FromAimPoint;
 }
 
@@ -77,7 +59,15 @@ void AWHDInputModule::OnUnPause_Implementation()
 	Super::OnUnPause_Implementation();
 }
 
-void AWHDInputModule::OnJumpPressed(FKey Key)
+void AWHDInputModule::OnBindAction_Implementation(UInputComponentBase* InInputComponent, UPlayerMappableInputConfig* InInputConfig)
+{
+	Super::OnBindAction_Implementation(InInputComponent, InInputConfig);
+
+	InInputComponent->BindInputAction(InInputConfig, GameplayTags::InputTag_Player_Jump, ETriggerEvent::Started, this, &AWHDInputModule::OnJumpPressed);
+	InInputComponent->BindInputAction(InInputConfig, GameplayTags::InputTag_Player_Jump, ETriggerEvent::Completed, this, &AWHDInputModule::OnJumpReleased);
+}
+
+void AWHDInputModule::OnJumpPressed()
 {
 	AWHDPlayerCharacter* PlayerCharacter = UCommonBPLibrary::GetPlayerPawn<AWHDPlayerCharacter>();
 

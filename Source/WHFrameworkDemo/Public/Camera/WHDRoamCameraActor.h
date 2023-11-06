@@ -2,16 +2,16 @@
 
 #pragma once
 
-#include "Camera/Roam/RoamCameraPawn.h"
-#include "WHDRoamCameraPawn.generated.h"
+#include "Camera/Roam/RoamCameraActor.h"
+#include "WHDRoamCameraActor.generated.h"
 
 UCLASS()
-class WHFRAMEWORKDEMO_API AWHDRoamCameraPawn : public ARoamCameraPawn
+class WHFRAMEWORKDEMO_API AWHDRoamCameraActor : public ARoamCameraActor
 {
 	GENERATED_BODY()
 
 public:
-	AWHDRoamCameraPawn();
+	AWHDRoamCameraActor();
 
 public:
 	virtual void OnPreparatory_Implementation(EPhase InPhase) override;

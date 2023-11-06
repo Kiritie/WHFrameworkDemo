@@ -20,31 +20,31 @@ UWHDWidgetCommonGameHUD::UWHDWidgetCommonGameHUD(const FObjectInitializer& Objec
 	SetIsFocusable(true);
 }
 
-void UWHDWidgetCommonGameHUD::OnCreate_Implementation(UObject* InOwner)
+void UWHDWidgetCommonGameHUD::OnCreate(UObject* InOwner)
 {
-	Super::OnCreate_Implementation(InOwner);
+	Super::OnCreate(InOwner);
 
 	UEventModuleBPLibrary::SubscribeEvent(UEventHandle_ChangeInputMode::StaticClass(), this, FName("OnChangeInputMode"));
 }
 
-void UWHDWidgetCommonGameHUD::OnInitialize_Implementation(UObject* InOwner)
+void UWHDWidgetCommonGameHUD::OnInitialize(UObject* InOwner)
 {
-	Super::OnInitialize_Implementation(InOwner);
+	Super::OnInitialize(InOwner);
 }
 
-void UWHDWidgetCommonGameHUD::OnOpen_Implementation(const TArray<FParameter>& InParams, bool bInstant)
+void UWHDWidgetCommonGameHUD::OnOpen(const TArray<FParameter>& InParams, bool bInstant)
 {
-	Super::OnOpen_Implementation(InParams, bInstant);
+	Super::OnOpen(InParams, bInstant);
 }
 
-void UWHDWidgetCommonGameHUD::OnClose_Implementation(bool bInstant)
+void UWHDWidgetCommonGameHUD::OnClose(bool bInstant)
 {
-	Super::OnClose_Implementation(bInstant);
+	Super::OnClose(bInstant);
 }
 
-void UWHDWidgetCommonGameHUD::OnRefresh_Implementation()
+void UWHDWidgetCommonGameHUD::OnRefresh()
 {
-	Super::OnRefresh_Implementation();
+	Super::OnRefresh();
 }
 
 FReply UWHDWidgetCommonGameHUD::NativeOnKeyDown(const FGeometry& InGeometry, const FKeyEvent& InKeyEvent)

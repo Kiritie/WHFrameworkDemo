@@ -39,8 +39,11 @@ public:
 	virtual void OnUnPause_Implementation() override;
 
 protected:
+	virtual void OnBindAction_Implementation(UInputComponentBase* InInputComponent, UPlayerMappableInputConfig* InInputConfig) override;
+
+protected:
 	UFUNCTION()
-	virtual void OnJumpPressed(FKey Key);
+	virtual void OnJumpPressed();
 
 	UFUNCTION()
 	virtual void OnJumpReleased();

@@ -10,7 +10,7 @@
  * 
  */
 UCLASS()
-class WHFRAMEWORKDEMO_API AWHDEventManager : public AEventManagerBase
+class WHFRAMEWORKDEMO_API UWHDEventManager : public UEventManagerBase
 {
 	GENERATED_BODY()
 	

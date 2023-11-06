@@ -29,6 +29,8 @@ public class WHFrameworkDemo : ModuleRules
 				"SlateCore",
 				"UMG",
 				"AIModule",
+				"CommonInput",
+				"EnhancedInput",
 				"GameplayAbilities",
 				"GameplayTags",
 				"GameplayTasks",

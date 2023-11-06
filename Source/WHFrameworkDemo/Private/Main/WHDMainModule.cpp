@@ -15,7 +15,7 @@
 #include "Animation/AnimationModule.h"
 #include "Common/CommonBPLibrary.h"
 #include "Input/WHDInputModule.h"
-#include "Media/MediaModule.h"
+#include "Video/VideoModule.h"
 #include "Network/NetworkModule.h"
 #include "ObjectPool/ObjectPoolModule.h"
 #include "Parameter/ParameterModule.h"
@@ -44,7 +44,7 @@ AWHDMainModule::AWHDMainModule()
 	ModuleClasses.Add(AEventModule::StaticClass());
 	ModuleClasses.Add(AFSMModule::StaticClass());
 	ModuleClasses.Add(AWHDInputModule::StaticClass());
-	ModuleClasses.Add(AMediaModule::StaticClass());
+	ModuleClasses.Add(AVideoModule::StaticClass());
 	ModuleClasses.Add(ANetworkModule::StaticClass());
 	ModuleClasses.Add(AObjectPoolModule::StaticClass());
 	ModuleClasses.Add(AParameterModule::StaticClass());

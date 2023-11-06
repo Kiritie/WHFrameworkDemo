@@ -1,24 +1,26 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "Camera/WHDRoamCameraPawn.h"
+#include "Camera/WHDRoamCameraActor.h"
 
 #include "Camera/CameraModuleBPLibrary.h"
 #include "Components/SphereComponent.h"
 #include "Voxel/VoxelModule.h"
 #include "Voxel/VoxelModuleBPLibrary.h"
 
-AWHDRoamCameraPawn::AWHDRoamCameraPawn()
+AWHDRoamCameraActor::AWHDRoamCameraActor()
 {
 	CameraName = FName("RoamCamera");
+
+	bFloorToChunk = false;
 }
 
-void AWHDRoamCameraPawn::OnPreparatory_Implementation(EPhase InPhase)
+void AWHDRoamCameraActor::OnPreparatory_Implementation(EPhase InPhase)
 {
 	Super::OnPreparatory_Implementation(InPhase);
 }
 
-void AWHDRoamCameraPawn::OnRefresh_Implementation(float DeltaSeconds)
+void AWHDRoamCameraActor::OnRefresh_Implementation(float DeltaSeconds)
 {
 	Super::OnRefresh_Implementation(DeltaSeconds);
 
