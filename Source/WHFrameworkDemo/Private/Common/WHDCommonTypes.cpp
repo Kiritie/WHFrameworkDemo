@@ -15,9 +15,7 @@ namespace GameplayTags
 	UE_DEFINE_GAMEPLAY_TAG_COMMENT(InputTag_Dodge, "Input.Player.Dodge", "Dodge");
 	
 	UE_DEFINE_GAMEPLAY_TAG_COMMENT(InputTag_ToggleCrouch, "Input.Player.ToggleCrouch", "Toggle Crouch");
-	UE_DEFINE_GAMEPLAY_TAG_COMMENT(InputTag_ToggleControlMode, "Input.Player.ToggleControlMode", "Toggle Control Mode");
 	UE_DEFINE_GAMEPLAY_TAG_COMMENT(InputTag_ToggleLockSightTarget, "Input.Player.ToggleLockSightTarget", "Toggle LockSight Target");
-	UE_DEFINE_GAMEPLAY_TAG_COMMENT(InputTag_ChangeHand, "Input.Player.ChangeHand", "ChangeHand");
 	
 	UE_DEFINE_GAMEPLAY_TAG_COMMENT(InputTag_Primary, "Input.Player.Primary", "PrimaryAction");
 	
@@ -42,14 +40,6 @@ namespace GameplayTags
 	UE_DEFINE_GAMEPLAY_TAG_COMMENT(InputTag_SelectInventorySlot8, "Input.Player.SelectInventorySlot8", "Select Inventory Slot8");
 	UE_DEFINE_GAMEPLAY_TAG_COMMENT(InputTag_SelectInventorySlot9, "Input.Player.SelectInventorySlot9", "Select Inventory Slot9");
 	UE_DEFINE_GAMEPLAY_TAG_COMMENT(InputTag_SelectInventorySlot10, "Input.Player.SelectInventorySlot10", "Select Inventory Slot10");
-	
-	////////////////////////////////////////////////////
-	// Input_System
-	UE_DEFINE_GAMEPLAY_TAG_COMMENT(InputTag_OpenInventoryPanel, "Input.System.OpenInventoryPanel", "Open Inventory Panel");
-	
-	UE_DEFINE_GAMEPLAY_TAG_COMMENT(InputTag_OpenGeneratePanel, "Input.System.OpenGeneratePanel", "Open Generate Panel");
-	
-	UE_DEFINE_GAMEPLAY_TAG_COMMENT(InputTag_PauseGame, "Input.System.PauseGame", "Pause Game");
 
 	////////////////////////////////////////////////////
 	// State_Character

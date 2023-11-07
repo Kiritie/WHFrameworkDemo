@@ -62,14 +62,6 @@ namespace GameplayTags
 	WHFRAMEWORKDEMO_API	UE_DECLARE_GAMEPLAY_TAG_EXTERN(InputTag_SelectInventorySlot10);
 	
 	////////////////////////////////////////////////////
-	// Input_System
-	WHFRAMEWORKDEMO_API	UE_DECLARE_GAMEPLAY_TAG_EXTERN(InputTag_OpenInventoryPanel);
-	
-	WHFRAMEWORKDEMO_API	UE_DECLARE_GAMEPLAY_TAG_EXTERN(InputTag_OpenGeneratePanel);
-	
-	WHFRAMEWORKDEMO_API	UE_DECLARE_GAMEPLAY_TAG_EXTERN(InputTag_PauseGame);
-	
-	////////////////////////////////////////////////////
 	// State_Character
 	WHFRAMEWORKDEMO_API	UE_DECLARE_GAMEPLAY_TAG_EXTERN(StateTag_Character_Dodging);
 	WHFRAMEWORKDEMO_API	UE_DECLARE_GAMEPLAY_TAG_EXTERN(StateTag_Character_Sprinting);
