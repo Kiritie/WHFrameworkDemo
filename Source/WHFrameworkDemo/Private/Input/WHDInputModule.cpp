@@ -63,8 +63,16 @@ void AWHDInputModule::OnBindAction_Implementation(UInputComponentBase* InInputCo
 {
 	Super::OnBindAction_Implementation(InInputComponent, InInputConfig);
 
-	InInputComponent->BindInputAction(InInputConfig, GameplayTags::InputTag_Player_Jump, ETriggerEvent::Started, this, &AWHDInputModule::OnJumpPressed);
-	InInputComponent->BindInputAction(InInputConfig, GameplayTags::InputTag_Player_Jump, ETriggerEvent::Completed, this, &AWHDInputModule::OnJumpReleased);
+	InInputComponent->BindInputAction(InInputConfig, GameplayTags::InputTag_Jump, ETriggerEvent::Started, this, &AWHDInputModule::OnJumpPressed);
+	InInputComponent->BindInputAction(InInputConfig, GameplayTags::InputTag_Jump, ETriggerEvent::Completed, this, &AWHDInputModule::OnJumpReleased);
+	
+	InInputComponent->BindInputAction(InInputConfig, GameplayTags::InputTag_Interact1, ETriggerEvent::Started, this, &AWHDInputModule::DoInteractAction1);
+	InInputComponent->BindInputAction(InInputConfig, GameplayTags::InputTag_Interact2, ETriggerEvent::Started, this, &AWHDInputModule::DoInteractAction2);
+	InInputComponent->BindInputAction(InInputConfig, GameplayTags::InputTag_Interact3, ETriggerEvent::Started, this, &AWHDInputModule::DoInteractAction3);
+	InInputComponent->BindInputAction(InInputConfig, GameplayTags::InputTag_Interact4, ETriggerEvent::Started, this, &AWHDInputModule::DoInteractAction4);
+	InInputComponent->BindInputAction(InInputConfig, GameplayTags::InputTag_Interact5, ETriggerEvent::Started, this, &AWHDInputModule::DoInteractAction5);
+	InInputComponent->BindInputAction(InInputConfig, GameplayTags::InputTag_PrevInventorySlot, ETriggerEvent::Started, this, &AWHDInputModule::PrevInventorySlot);
+	InInputComponent->BindInputAction(InInputConfig, GameplayTags::InputTag_NextInventorySlot, ETriggerEvent::Started, this, &AWHDInputModule::NextInventorySlot);
 }
 
 void AWHDInputModule::OnJumpPressed()
