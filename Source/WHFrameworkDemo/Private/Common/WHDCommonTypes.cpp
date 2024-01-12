@@ -4,8 +4,6 @@ namespace GameplayTags
 {
 	////////////////////////////////////////////////////
 	// Input_Player
-	UE_DEFINE_GAMEPLAY_TAG_COMMENT(InputTag_Jump, "Input.Player.Jump", "Jump");
-	
 	UE_DEFINE_GAMEPLAY_TAG_COMMENT(InputTag_Interact1, "Input.Player.Interact1", "Interact1");
 	UE_DEFINE_GAMEPLAY_TAG_COMMENT(InputTag_Interact2, "Input.Player.Interact2", "Interact2");
 	UE_DEFINE_GAMEPLAY_TAG_COMMENT(InputTag_Interact3, "Input.Player.Interact3", "Interact3");

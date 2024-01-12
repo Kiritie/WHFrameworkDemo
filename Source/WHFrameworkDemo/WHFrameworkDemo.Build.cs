@@ -6,11 +6,7 @@ public class WHFrameworkDemo : ModuleRules
 {
 	public WHFrameworkDemo(ReadOnlyTargetRules Target) : base(Target)
 	{
-		PrivatePCHHeaderFile = "WHFrameworkDemo.h";
-
 		bLegacyPublicIncludePaths = false;
-
-		ShadowVariableWarningLevel = WarningLevel.Error;
 
 		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
 
@@ -27,7 +23,9 @@ public class WHFrameworkDemo : ModuleRules
 			new string[] {
 				"InputCore",
 				"SlateCore",
+				"Slate",
 				"UMG",
+				"CommonUI",
 				"AIModule",
 				"CommonInput",
 				"EnhancedInput",

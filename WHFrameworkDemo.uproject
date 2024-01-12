@@ -1,6 +1,6 @@
 {
 	"FileVersion": 3,
-	"EngineAssociation": "5.2",
+	"EngineAssociation": "5.3",
 	"Category": "",
 	"Description": "",
 	"Modules": [
@@ -9,20 +9,17 @@
 			"Type": "Runtime",
 			"LoadingPhase": "Default",
 			"AdditionalDependencies": [
-				"Engine",
-				"GameplayAbilities",
-				"ProceduralMeshComponent",
 				"WHFramework"
 			]
 		}
 	],
 	"Plugins": [
 		{
-			"Name": "GameplayAbilities",
+			"Name": "WHFramework",
 			"Enabled": true
 		},
 		{
-			"Name": "ProceduralMeshComponent",
+			"Name": "CommonUI",
 			"Enabled": true
 		}
 	]

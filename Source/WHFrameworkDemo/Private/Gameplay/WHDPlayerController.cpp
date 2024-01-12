@@ -3,7 +3,7 @@
 
 #include "Gameplay/WHDPlayerController.h"
 
-#include "SaveGame/SaveGameModuleBPLibrary.h"
+#include "SaveGame/SaveGameModuleStatics.h"
 
 AWHDPlayerController::AWHDPlayerController()
 {

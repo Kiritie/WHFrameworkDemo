@@ -4,8 +4,9 @@
 #include "Common/Widgets/WHDWidgetCommonGameHUD.h"
 
 #include "Character/WHDPlayerCharacter.h"
-#include "Event/EventModuleBPLibrary.h"
-#include "Event/Handle/Input/EventHandle_ChangeInputMode.h"
+#include "Event/EventModuleStatics.h"
+#include "Event/Handle/Input/EventHandle_InputModeChanged.h"
+#include "Input/InputModuleStatics.h"
 #include "Widget/WidgetModule.h"
 
 
@@ -20,16 +21,16 @@ UWHDWidgetCommonGameHUD::UWHDWidgetCommonGameHUD(const FObjectInitializer& Objec
 	SetIsFocusable(true);
 }
 
-void UWHDWidgetCommonGameHUD::OnCreate(UObject* InOwner)
+void UWHDWidgetCommonGameHUD::OnCreate(UObject* InOwner, const TArray<FParameter>& InParams)
 {
-	Super::OnCreate(InOwner);
+	Super::OnCreate(InOwner, InParams);
 
-	UEventModuleBPLibrary::SubscribeEvent(UEventHandle_ChangeInputMode::StaticClass(), this, FName("OnChangeInputMode"));
+	UEventModuleStatics::SubscribeEvent(UEventHandle_InputModeChanged::StaticClass(), this, FName("OnChangeInputMode"));
 }
 
-void UWHDWidgetCommonGameHUD::OnInitialize(UObject* InOwner)
+void UWHDWidgetCommonGameHUD::OnInitialize(UObject* InOwner, const TArray<FParameter>& InParams)
 {
-	Super::OnInitialize(InOwner);
+	Super::OnInitialize(InOwner, InParams);
 }
 
 void UWHDWidgetCommonGameHUD::OnOpen(const TArray<FParameter>& InParams, bool bInstant)
@@ -49,7 +50,7 @@ void UWHDWidgetCommonGameHUD::OnRefresh()
 
 FReply UWHDWidgetCommonGameHUD::NativeOnKeyDown(const FGeometry& InGeometry, const FKeyEvent& InKeyEvent)
 {
-	if(InKeyEvent.GetKey() == FKey("Escape"))
+	if(UInputModuleStatics::IsPlayerMappedKeyByName(FName("SystemOperation"), InKeyEvent.GetKey()))
 	{
 		if(TemporaryChild)
 		{
@@ -60,7 +61,7 @@ FReply UWHDWidgetCommonGameHUD::NativeOnKeyDown(const FGeometry& InGeometry, con
 	return FReply::Unhandled();
 }
 
-void UWHDWidgetCommonGameHUD::OnChangeInputMode(UObject* InSender, UEventHandle_ChangeInputMode* InEventHandle)
+void UWHDWidgetCommonGameHUD::OnChangeInputMode(UObject* InSender, UEventHandle_InputModeChanged* InEventHandle)
 {
 	if(AWHDPlayerCharacter* OwnerCharacter = Cast<AWHDPlayerCharacter>(OwnerObject))
 	{

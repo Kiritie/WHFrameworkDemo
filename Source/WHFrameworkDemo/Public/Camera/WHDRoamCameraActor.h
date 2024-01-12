@@ -2,7 +2,7 @@
 
 #pragma once
 
-#include "Camera/Roam/RoamCameraActor.h"
+#include "Camera/Actor/RoamCameraActor.h"
 #include "WHDRoamCameraActor.generated.h"
 
 UCLASS()

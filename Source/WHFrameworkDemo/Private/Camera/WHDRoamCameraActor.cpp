@@ -3,10 +3,10 @@
 
 #include "Camera/WHDRoamCameraActor.h"
 
-#include "Camera/CameraModuleBPLibrary.h"
+#include "Camera/CameraModuleStatics.h"
 #include "Components/SphereComponent.h"
 #include "Voxel/VoxelModule.h"
-#include "Voxel/VoxelModuleBPLibrary.h"
+#include "Voxel/VoxelModuleStatics.h"
 
 AWHDRoamCameraActor::AWHDRoamCameraActor()
 {
@@ -24,13 +24,13 @@ void AWHDRoamCameraActor::OnRefresh_Implementation(float DeltaSeconds)
 {
 	Super::OnRefresh_Implementation(DeltaSeconds);
 
-	if(bFloorToChunk && GetActorLocation().Z == 0.f && AVoxelModule::Get()->IsBasicGenerated())
+	if(bFloorToChunk && GetActorLocation().Z == 0.f && UVoxelModule::Get().IsBasicGenerated())
 	{
 		FHitResult HitResult;
-		const FVector ChunkSize = UVoxelModuleBPLibrary::GetWorldData().GetChunkRealSize();
-		if(UVoxelModuleBPLibrary::VoxelAgentTraceSingle(GetActorLocation(), FVector2D(ChunkSize.X, ChunkSize.Y), Sphere->GetScaledSphereRadius(), Sphere->GetScaledSphereRadius(), {}, HitResult, false, 10, true))
+		const FVector ChunkSize = UVoxelModuleStatics::GetWorldData().GetChunkRealSize();
+		if(UVoxelModuleStatics::VoxelAgentTraceSingle(GetActorLocation(), FVector2D(ChunkSize.X, ChunkSize.Y), Sphere->GetScaledSphereRadius(), Sphere->GetScaledSphereRadius(), {}, HitResult, false, 10, true))
 		{
-			UCameraModuleBPLibrary::SetCameraLocation(HitResult.Location);
+			UCameraModuleStatics::SetCameraLocation(HitResult.Location);
 		}
 	}
 }

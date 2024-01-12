@@ -2,7 +2,6 @@
 
 #pragma once
 
-#include "Ability/AbilityModuleTypes.h"
 #include "Widget/Screen/UMG/UserWidgetBase.h"
 #include "WHDWidgetCommonGameHUD.generated.h"
 
@@ -20,9 +19,9 @@ public:
 	UWHDWidgetCommonGameHUD(const FObjectInitializer& ObjectInitializer);
 
 public:
-	virtual void OnCreate(UObject* InOwner) override;
+	virtual void OnCreate(UObject* InOwner, const TArray<FParameter>& InParams) override;
 
-	virtual void OnInitialize(UObject* InOwner) override;
+	virtual void OnInitialize(UObject* InOwner, const TArray<FParameter>& InParams) override;
 
 	virtual void OnOpen(const TArray<FParameter>& InParams, bool bInstant) override;
 
@@ -44,5 +43,5 @@ public:
 
 protected:
 	UFUNCTION()
-	void OnChangeInputMode(UObject* InSender, class UEventHandle_ChangeInputMode* InEventHandle);
+	void OnChangeInputMode(UObject* InSender, class UEventHandle_InputModeChanged* InEventHandle);
 };

@@ -3,51 +3,26 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Input/InputModule.h"
+#include "Input/Manager/DefaultInputManagerBase.h"
 #include "Voxel/VoxelModuleTypes.h"
 
-#include "WHDInputModule.generated.h"
+#include "WHDInputManager.generated.h"
 
 UCLASS()
-class WHFRAMEWORKDEMO_API AWHDInputModule : public AInputModule
+class WHFRAMEWORKDEMO_API UWHDInputManager : public UDefaultInputManagerBase
 {
 	GENERATED_BODY()
 	
-	GENERATED_MODULE(AWHDInputModule)
-
 public:	
 	// ParamSets default values for this actor's properties
-	AWHDInputModule();
+	UWHDInputManager();
 	
-	//////////////////////////////////////////////////////////////////////////
-	/// Module
 public:
-#if WITH_EDITOR
-	virtual void OnGenerate() override;
+	virtual void OnInitialize() override;
 
-	virtual void OnDestroy() override;
-#endif
-
-	virtual void OnInitialize_Implementation() override;
-
-	virtual void OnPreparatory_Implementation(EPhase InPhase) override;
-
-	virtual void OnRefresh_Implementation(float DeltaSeconds) override;
-
-	virtual void OnPause_Implementation() override;
-
-	virtual void OnUnPause_Implementation() override;
+	virtual void OnBindAction(UInputComponentBase* InInputComponent) override;
 
 protected:
-	virtual void OnBindAction_Implementation(UInputComponentBase* InInputComponent, UPlayerMappableInputConfig* InInputConfig) override;
-
-protected:
-	UFUNCTION()
-	virtual void OnJumpPressed();
-
-	UFUNCTION()
-	virtual void OnJumpReleased();
-
 	UFUNCTION()
 	virtual void OnAction1Pressed();
 

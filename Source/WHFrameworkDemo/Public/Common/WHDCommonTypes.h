@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Ability/AbilityModuleTypes.h"
+#include "Common/CommonTypes.h"
 
 #include "WHDCommonTypes.generated.h"
 

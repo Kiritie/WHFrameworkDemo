@@ -4,7 +4,7 @@
 #include "Gameplay/WHDPlayerController.h"
 #include "Gameplay/WHDGameState.h"
 #include "Kismet/GameplayStatics.h"
-#include "SaveGame/SaveGameModuleBPLibrary.h"
+#include "SaveGame/SaveGameModuleStatics.h"
 
 AWHDGameMode::AWHDGameMode()
 {

@@ -4,9 +4,8 @@
 
 #include "Common/Actors/WHDEnterLevelTrigger.h"
 
-#include "Camera/CameraModuleBPLibrary.h"
+#include "Camera/CameraModuleStatics.h"
 #include "Character/WHDPlayerCharacter.h"
-#include "Common/CommonBPLibrary.h"
 #include "Common/WHDCommonTypes.h"
 #include "Common/Interaction/InteractionComponent.h"
 #include "Components/TextRenderComponent.h"
@@ -34,7 +33,7 @@ void AWHDEnterLevelTrigger::OnRefresh_Implementation(float DeltaSeconds)
 {
 	Super::OnRefresh_Implementation(DeltaSeconds);
 
-	const FRotator TargetRotation = UCameraModuleBPLibrary::GetCameraRotation(true);
+	const FRotator TargetRotation = UCameraModuleStatics::GetCameraRotation(true);
 	Text->SetWorldRotation(FRotator(0.f, TargetRotation.Yaw, 0.f));
 }
 
