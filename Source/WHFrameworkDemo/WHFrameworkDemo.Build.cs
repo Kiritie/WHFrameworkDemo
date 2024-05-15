@@ -15,7 +15,8 @@ public class WHFrameworkDemo : ModuleRules
 				"Core",
 				"CoreUObject",
 				"Engine",
-				"WHFramework"
+				"WHFramework",
+				"WHFrameworkCore"
 			}
 		);
 

@@ -63,7 +63,7 @@ bool AWHDPlayerCharacter::CanInteract(EInteractAction InInteractAction, IInterac
 {
 	switch (InInteractAction)
 	{
-		case EWHDInteractAction::Switch:
+		case (EInteractAction)EWHDInteractAction::Switch:
 		{
 			if(Cast<AWHDPlayerCharacter>(InInteractionAgent))
 			{
@@ -103,7 +103,7 @@ void AWHDPlayerCharacter::OnInteract(EInteractAction InInteractAction, IInteract
 	{
 		switch (InInteractAction)
 		{
-			case EWHDInteractAction::Switch:
+			case (EInteractAction)EWHDInteractAction::Switch:
 			{
 				UCharacterModuleStatics::SwitchCharacter(this, true);
 				break;

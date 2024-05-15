@@ -6,13 +6,11 @@
 #include "Common/CommonStatics.h"
 #include "Common/WHDCommonTypes.h"
 #include "Input/Components/InputComponentBase.h"
-#include "Voxel/VoxelModuleStatics.h"
-#include "Voxel/Voxels/Voxel.h"
 
 // ParamSets default values
 UWHDInputManager::UWHDInputManager()
 {
-	VoxelRaycastType = EVoxelRaycastType::FromAimPoint;
+	
 }
 
 void UWHDInputManager::OnInitialize()
@@ -24,50 +22,14 @@ void UWHDInputManager::OnBindAction(UInputComponentBase* InInputComponent)
 {
 	Super::OnBindAction(InInputComponent);
 
-	InInputComponent->BindInputAction(GameplayTags::InputTag_Interact1, ETriggerEvent::Started, this, &UWHDInputManager::DoInteractAction1);
-	InInputComponent->BindInputAction(GameplayTags::InputTag_Interact2, ETriggerEvent::Started, this, &UWHDInputManager::DoInteractAction2);
-	InInputComponent->BindInputAction(GameplayTags::InputTag_Interact3, ETriggerEvent::Started, this, &UWHDInputManager::DoInteractAction3);
-	InInputComponent->BindInputAction(GameplayTags::InputTag_Interact4, ETriggerEvent::Started, this, &UWHDInputManager::DoInteractAction4);
-	InInputComponent->BindInputAction(GameplayTags::InputTag_Interact5, ETriggerEvent::Started, this, &UWHDInputManager::DoInteractAction5);
-	InInputComponent->BindInputAction(GameplayTags::InputTag_PrevInventorySlot, ETriggerEvent::Started, this, &UWHDInputManager::PrevInventorySlot);
-	InInputComponent->BindInputAction(GameplayTags::InputTag_NextInventorySlot, ETriggerEvent::Started, this, &UWHDInputManager::NextInventorySlot);
+	InInputComponent->BindInputAction(GameplayTags::InputTag_Interact1, ETriggerEvent::Started, this, &UWHDInputManager::DoInteract1);
+	InInputComponent->BindInputAction(GameplayTags::InputTag_Interact2, ETriggerEvent::Started, this, &UWHDInputManager::DoInteract2);
+	InInputComponent->BindInputAction(GameplayTags::InputTag_Interact3, ETriggerEvent::Started, this, &UWHDInputManager::DoInteract3);
+	InInputComponent->BindInputAction(GameplayTags::InputTag_Interact4, ETriggerEvent::Started, this, &UWHDInputManager::DoInteract4);
+	InInputComponent->BindInputAction(GameplayTags::InputTag_Interact5, ETriggerEvent::Started, this, &UWHDInputManager::DoInteract5);
 }
 
-void UWHDInputManager::OnAction1Pressed()
-{
-	AWHDPlayerCharacter* PlayerCharacter = UCommonStatics::GetPlayerPawn<AWHDPlayerCharacter>();
-
-	if(!PlayerCharacter) return;
-
-	FVoxelHitResult voxelHitResult;
-	if(UVoxelModuleStatics::VoxelRaycastSinge(VoxelRaycastType, 100000.f, {}, voxelHitResult))
-	{
-		voxelHitResult.GetVoxel().OnAgentInteract(PlayerCharacter, EInputInteractAction::Action1, voxelHitResult);
-	}
-}
-
-void UWHDInputManager::OnAction1Released()
-{
-}
-
-void UWHDInputManager::OnAction2Pressed()
-{
-	AWHDPlayerCharacter* PlayerCharacter = UCommonStatics::GetPlayerPawn<AWHDPlayerCharacter>();
-
-	if(!PlayerCharacter) return;
-
-	FVoxelHitResult voxelHitResult;
-	if(UVoxelModuleStatics::VoxelRaycastSinge(VoxelRaycastType, 100000.f, {}, voxelHitResult))
-	{
-		voxelHitResult.GetVoxel().OnAgentInteract(PlayerCharacter, EInputInteractAction::Action2, voxelHitResult);
-	}
-}
-
-void UWHDInputManager::OnAction2Released()
-{
-}
-
-void UWHDInputManager::DoInteractAction1()
+void UWHDInputManager::DoInteract1()
 {
 	AWHDPlayerCharacter* PlayerCharacter = UCommonStatics::GetPlayerPawn<AWHDPlayerCharacter>();
 	
@@ -79,7 +41,7 @@ void UWHDInputManager::DoInteractAction1()
 	}
 }
 
-void UWHDInputManager::DoInteractAction2()
+void UWHDInputManager::DoInteract2()
 {
 	AWHDPlayerCharacter* PlayerCharacter = UCommonStatics::GetPlayerPawn<AWHDPlayerCharacter>();
 	
@@ -91,7 +53,7 @@ void UWHDInputManager::DoInteractAction2()
 	}
 }
 
-void UWHDInputManager::DoInteractAction3()
+void UWHDInputManager::DoInteract3()
 {
 	AWHDPlayerCharacter* PlayerCharacter = UCommonStatics::GetPlayerPawn<AWHDPlayerCharacter>();
 	
@@ -103,7 +65,7 @@ void UWHDInputManager::DoInteractAction3()
 	}
 }
 
-void UWHDInputManager::DoInteractAction4()
+void UWHDInputManager::DoInteract4()
 {
 	AWHDPlayerCharacter* PlayerCharacter = UCommonStatics::GetPlayerPawn<AWHDPlayerCharacter>();
 	
@@ -115,7 +77,7 @@ void UWHDInputManager::DoInteractAction4()
 	}
 }
 
-void UWHDInputManager::DoInteractAction5()
+void UWHDInputManager::DoInteract5()
 {
 	AWHDPlayerCharacter* PlayerCharacter = UCommonStatics::GetPlayerPawn<AWHDPlayerCharacter>();
 	
@@ -125,12 +87,4 @@ void UWHDInputManager::DoInteractAction5()
 	{
 		PlayerCharacter->DoInteract(PlayerCharacter->GetInteractableActions()[4]);
 	}
-}
-
-void UWHDInputManager::PrevInventorySlot()
-{
-}
-
-void UWHDInputManager::NextInventorySlot()
-{
 }

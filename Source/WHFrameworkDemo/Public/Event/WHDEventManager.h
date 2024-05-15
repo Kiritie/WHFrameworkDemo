@@ -13,5 +13,7 @@ UCLASS()
 class WHFRAMEWORKDEMO_API UWHDEventManager : public UEventManagerBase
 {
 	GENERATED_BODY()
-	
+
+public:
+	virtual void OnInitialize() override;
 };

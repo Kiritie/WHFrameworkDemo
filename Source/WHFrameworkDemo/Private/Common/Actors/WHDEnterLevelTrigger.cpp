@@ -41,7 +41,7 @@ bool AWHDEnterLevelTrigger::CanInteract(EInteractAction InInteractAction, IInter
 {
 	switch (InInteractAction)
 	{
-		case EWHDInteractAction::Enter:
+		case (EInteractAction)EWHDInteractAction::Enter:
 		{
 			if(Cast<AWHDPlayerCharacter>(InInteractionAgent))
 			{
@@ -67,7 +67,7 @@ void AWHDEnterLevelTrigger::OnInteract(EInteractAction InInteractAction, IIntera
 	
 	switch (InInteractAction)
 	{
-		case EWHDInteractAction::Enter:
+		case (EInteractAction)EWHDInteractAction::Enter:
 		{
 			if(!Level.IsNull())
 			{

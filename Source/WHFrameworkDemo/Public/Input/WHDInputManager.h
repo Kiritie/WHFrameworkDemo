@@ -4,7 +4,6 @@
 
 #include "CoreMinimal.h"
 #include "Input/Manager/DefaultInputManagerBase.h"
-#include "Voxel/VoxelModuleTypes.h"
 
 #include "WHDInputManager.generated.h"
 
@@ -24,39 +23,17 @@ public:
 
 protected:
 	UFUNCTION()
-	virtual void OnAction1Pressed();
+	virtual void DoInteract1();
 
 	UFUNCTION()
-	virtual void OnAction1Released();
+	virtual void DoInteract2();
 
 	UFUNCTION()
-	virtual void OnAction2Pressed();
+	virtual void DoInteract3();
 
 	UFUNCTION()
-	virtual void OnAction2Released();
+	virtual void DoInteract4();
 
 	UFUNCTION()
-	virtual void DoInteractAction1();
-
-	UFUNCTION()
-	virtual void DoInteractAction2();
-
-	UFUNCTION()
-	virtual void DoInteractAction3();
-
-	UFUNCTION()
-	virtual void DoInteractAction4();
-
-	UFUNCTION()
-	virtual void DoInteractAction5();
-
-	UFUNCTION()
-	virtual void PrevInventorySlot();
-
-	UFUNCTION()
-	virtual void NextInventorySlot();
-	
-protected:
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "InputStats")
-	EVoxelRaycastType VoxelRaycastType;
+	virtual void DoInteract5();
 };
