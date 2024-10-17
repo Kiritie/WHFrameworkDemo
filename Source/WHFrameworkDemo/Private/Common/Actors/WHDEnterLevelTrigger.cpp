@@ -24,6 +24,13 @@ AWHDEnterLevelTrigger::AWHDEnterLevelTrigger()
 	Text->SetupAttachment(RootComponent);
 	Text->SetRelativeLocation(FVector(0.f, 0.f, 100.f));
 	Text->SetRelativeScale3D(FVector(-1.f, -1.f, 1.f));
+
+	static ConstructorHelpers::FObjectFinder<UMaterialInterface> TextMatFinder(TEXT("/Script/Engine.MaterialInstanceConstant'/WHFramework/Common/Materials/M_DefaultText_Unlit.M_DefaultText_Unlit'"));
+	if(TextMatFinder.Succeeded())
+	{
+		Text->SetMaterial(0, TextMatFinder.Object);
+	}
+
 	Text->WorldSize = 100.f;
 	Text->HorizontalAlignment = EHTA_Center;
 	Text->VerticalAlignment = EVRTA_TextCenter;

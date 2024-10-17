@@ -25,6 +25,11 @@ public:
 	virtual void OnRefresh_Implementation(float DeltaSeconds) override;
 
 protected:
+	virtual void LoadData(FSaveData* InSaveData, EPhase InPhase) override;
+
+	virtual void UnloadData(EPhase InPhase) override;
+
+protected:
 	virtual bool CanInteract(EInteractAction InInteractAction, IInteractionAgentInterface* InInteractionAgent) override;
 
 	virtual void OnEnterInteract(IInteractionAgentInterface* InInteractionAgent) override;
@@ -34,8 +39,4 @@ protected:
 	virtual void OnInteract(EInteractAction InInteractAction, IInteractionAgentInterface* InInteractionAgent, bool bPassivity) override;
 
 	virtual bool OnInteractVoxel(const FVoxelHitResult& InVoxelHitResult, EInputInteractAction InInteractAction) override;
-
-protected:
-	UPROPERTY(EditAnywhere, Category = "CharacterStats")
-	bool bFloorToChunk;
 };

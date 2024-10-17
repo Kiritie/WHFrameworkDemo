@@ -3,17 +3,19 @@
 #include "Character/WHDPlayerCharacter.h"
 
 #include "Ability/Character/AbilityCharacterInventoryBase.h"
+#include "Ability/Character/States/AbilityCharacterState_Fall.h"
+#include "Ability/Character/States/AbilityCharacterState_Jump.h"
+#include "Ability/Character/States/AbilityCharacterState_Static.h"
+#include "Ability/Character/States/AbilityCharacterState_Walk.h"
 #include "Ability/Components/AbilitySystemComponentBase.h"
-#include "Camera/CameraComponent.h"
 #include "Character/CharacterModuleStatics.h"
+#include "Character/State/WHDPlayerCharacterState_Death.h"
+#include "Character/State/WHDPlayerCharacterState_Spawn.h"
 #include "Common/WHDCommonTypes.h"
 #include "Common/Interaction/InteractionComponent.h"
 #include "Common/Widgets/WHDWidgetCommonGameHUD.h"
-#include "Components/CapsuleComponent.h"
 #include "Components/SkeletalMeshComponent.h"
-#include "GameFramework/PawnMovementComponent.h"
-#include "Voxel/VoxelModule.h"
-#include "Voxel/VoxelModuleStatics.h"
+#include "FSM/Components/FSMComponent.h"
 #include "Voxel/Voxels/Auxiliary/VoxelInteractAuxiliary.h"
 #include "Widget/WidgetModuleStatics.h"
 
@@ -25,9 +27,22 @@ AWHDPlayerCharacter::AWHDPlayerCharacter(const FObjectInitializer& ObjectInitial
 		SetDefaultSubobjectClass<UCharacterAttributeSetBase>("AttributeSet").
 		SetDefaultSubobjectClass<UAbilityCharacterInventoryBase>("Inventory"))
 {
+	GetMesh()->SetRelativeLocation(FVector(0.f, 0.f, -70.f));
+
 	Interaction->SetRelativeLocation(FVector(0.f, 0.f, -39.f));
 
-	GetMesh()->SetRelativeLocation(FVector(0.f, 0.f, -70.f));
+	FSM->bAutoSwitchDefault = true;
+
+	FSM->DefaultState = UWHDPlayerCharacterState_Spawn::StaticClass();
+	FSM->FinalState = UWHDPlayerCharacterState_Death::StaticClass();
+
+	FSM->States.Empty();
+	FSM->States.Add(UWHDPlayerCharacterState_Death::StaticClass());
+	FSM->States.Add(UWHDPlayerCharacterState_Spawn::StaticClass());
+	FSM->States.Add(UAbilityCharacterState_Fall::StaticClass());
+	FSM->States.Add(UAbilityCharacterState_Jump::StaticClass());
+	FSM->States.Add(UAbilityCharacterState_Static::StaticClass());
+	FSM->States.Add(UAbilityCharacterState_Walk::StaticClass());
 
 	AutoPossessAI = EAutoPossessAI::Disabled;
 }
@@ -36,27 +51,27 @@ void AWHDPlayerCharacter::OnInitialize_Implementation()
 {
 	Super::OnInitialize_Implementation();
 
-	if(bFloorToChunk)
-	{
-		GetMovementComponent()->SetActive(false);
-	}
+	FInventorySaveData InventorySaveData;
+	InventorySaveData.InventoryClass = UAbilityCharacterInventoryBase::StaticClass();
+	InventorySaveData.SplitItems.Add(ESlotSplitType::Default, 50);
+	InventorySaveData.SplitItems.Add(ESlotSplitType::Shortcut, 10);
+	
+	Inventory->LoadSaveData(&InventorySaveData);
 }
 
 void AWHDPlayerCharacter::OnRefresh_Implementation(float DeltaSeconds)
 {
 	Super::OnRefresh_Implementation(DeltaSeconds);
+}
 
-	if(bFloorToChunk && GetActorLocation().Z <= 0.f && UVoxelModule::Get().IsBasicGenerated())
-	{
-		FHitResult HitResult;
-		const FVector ChunkSize = UVoxelModuleStatics::GetWorldData().GetChunkRealSize();
-		if(UVoxelModuleStatics::VoxelAgentTraceSingle(GetActorLocation(), FVector2D(ChunkSize.X, ChunkSize.Y), GetCapsuleComponent()->GetScaledCapsuleRadius(), GetCapsuleComponent()->GetScaledCapsuleHalfHeight(), {}, HitResult, false, 10, true))
-		{
-			SetActorLocation(HitResult.Location);
-			GetMovementComponent()->SetActive(true);
-			GetMovementComponent()->Velocity = FVector::ZeroVector;
-		}
-	}
+void AWHDPlayerCharacter::LoadData(FSaveData* InSaveData, EPhase InPhase)
+{
+	ACharacterBase::LoadData(InSaveData, InPhase);
+}
+
+void AWHDPlayerCharacter::UnloadData(EPhase InPhase)
+{
+	ACharacterBase::UnloadData(InPhase);
 }
 
 bool AWHDPlayerCharacter::CanInteract(EInteractAction InInteractAction, IInteractionAgentInterface* InInteractionAgent)

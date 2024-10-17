@@ -43,6 +43,8 @@ protected:
 	TSoftObjectPtr<UWorld> Level;
 
 public:
+	virtual EInteractAgentType GetInteractAgentType() const override { return EInteractAgentType::Passivity; }
+	
 	UFUNCTION(BlueprintPure, meta = (DeterminesOutputType = "InAgentClass"))
 	virtual AActor* GetInteractingAgent(TSubclassOf<AActor> InAgentClass) const { return Cast<AActor>(GetInteractingAgent()); }
 
