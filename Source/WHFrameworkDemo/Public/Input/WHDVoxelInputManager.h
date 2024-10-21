@@ -30,10 +30,10 @@ protected:
 	virtual void OnPrimaryReleased();
 
 	UFUNCTION()
-	virtual void OnMinorPressed();
+	virtual void OnSecondaryPressed();
 
 	UFUNCTION()
-	virtual void OnMinorReleased();
+	virtual void OnSecondaryReleased();
 
 	UFUNCTION()
 	virtual void PrevInventorySlot();

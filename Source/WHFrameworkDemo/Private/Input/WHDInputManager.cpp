@@ -22,11 +22,11 @@ void UWHDInputManager::OnBindAction(UInputComponentBase* InInputComponent)
 {
 	Super::OnBindAction(InInputComponent);
 
-	InInputComponent->BindInputAction(GameplayTags::InputTag_Interact1, ETriggerEvent::Started, this, &UWHDInputManager::DoInteract1);
-	InInputComponent->BindInputAction(GameplayTags::InputTag_Interact2, ETriggerEvent::Started, this, &UWHDInputManager::DoInteract2);
-	InInputComponent->BindInputAction(GameplayTags::InputTag_Interact3, ETriggerEvent::Started, this, &UWHDInputManager::DoInteract3);
-	InInputComponent->BindInputAction(GameplayTags::InputTag_Interact4, ETriggerEvent::Started, this, &UWHDInputManager::DoInteract4);
-	InInputComponent->BindInputAction(GameplayTags::InputTag_Interact5, ETriggerEvent::Started, this, &UWHDInputManager::DoInteract5);
+	InInputComponent->BindInputAction(GameplayTags::Input_Interact1, ETriggerEvent::Started, this, &UWHDInputManager::DoInteract1);
+	InInputComponent->BindInputAction(GameplayTags::Input_Interact2, ETriggerEvent::Started, this, &UWHDInputManager::DoInteract2);
+	InInputComponent->BindInputAction(GameplayTags::Input_Interact3, ETriggerEvent::Started, this, &UWHDInputManager::DoInteract3);
+	InInputComponent->BindInputAction(GameplayTags::Input_Interact4, ETriggerEvent::Started, this, &UWHDInputManager::DoInteract4);
+	InInputComponent->BindInputAction(GameplayTags::Input_Interact5, ETriggerEvent::Started, this, &UWHDInputManager::DoInteract5);
 }
 
 void UWHDInputManager::DoInteract1()

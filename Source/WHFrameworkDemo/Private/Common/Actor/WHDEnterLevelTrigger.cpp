@@ -1,8 +1,7 @@
 
 // Fill out your copyright notice in the Description page of Project Settings.
 
-
-#include "Common/Actors/WHDEnterLevelTrigger.h"
+#include "Common/Actor/WHDEnterLevelTrigger.h"
 
 #include "Camera/CameraModuleStatics.h"
 #include "Character/WHDPlayerCharacter.h"

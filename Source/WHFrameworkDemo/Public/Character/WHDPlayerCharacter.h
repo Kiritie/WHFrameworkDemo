@@ -27,7 +27,7 @@ public:
 protected:
 	virtual void LoadData(FSaveData* InSaveData, EPhase InPhase) override;
 
-	virtual void UnloadData(EPhase InPhase) override;
+	virtual FSaveData* ToData() override;
 
 protected:
 	virtual bool CanInteract(EInteractAction InInteractAction, IInteractionAgentInterface* InInteractionAgent) override;
@@ -37,6 +37,8 @@ protected:
 	virtual void OnLeaveInteract(IInteractionAgentInterface* InInteractionAgent) override;
 	
 	virtual void OnInteract(EInteractAction InInteractAction, IInteractionAgentInterface* InInteractionAgent, bool bPassivity) override;
+
+	virtual bool OnGenerateVoxel(const FVoxelHitResult& InVoxelHitResult) override;
 
 	virtual bool OnInteractVoxel(const FVoxelHitResult& InVoxelHitResult, EInputInteractAction InInteractAction) override;
 };

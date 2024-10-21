@@ -13,7 +13,7 @@
 #include "Character/State/WHDPlayerCharacterState_Spawn.h"
 #include "Common/WHDCommonTypes.h"
 #include "Common/Interaction/InteractionComponent.h"
-#include "Common/Widgets/WHDWidgetCommonGameHUD.h"
+#include "Common/Widget/Interaction/WHDWidgetCommonInteractionBox.h"
 #include "Components/SkeletalMeshComponent.h"
 #include "FSM/Components/FSMComponent.h"
 #include "Voxel/Voxels/Auxiliary/VoxelInteractAuxiliary.h"
@@ -53,7 +53,6 @@ void AWHDPlayerCharacter::OnInitialize_Implementation()
 
 	FInventorySaveData InventorySaveData;
 	InventorySaveData.InventoryClass = UAbilityCharacterInventoryBase::StaticClass();
-	InventorySaveData.SplitItems.Add(ESlotSplitType::Default, 50);
 	InventorySaveData.SplitItems.Add(ESlotSplitType::Shortcut, 10);
 	
 	Inventory->LoadSaveData(&InventorySaveData);
@@ -69,9 +68,9 @@ void AWHDPlayerCharacter::LoadData(FSaveData* InSaveData, EPhase InPhase)
 	ACharacterBase::LoadData(InSaveData, InPhase);
 }
 
-void AWHDPlayerCharacter::UnloadData(EPhase InPhase)
+FSaveData* AWHDPlayerCharacter::ToData()
 {
-	ACharacterBase::UnloadData(InPhase);
+	return ACharacterBase::ToData();
 }
 
 bool AWHDPlayerCharacter::CanInteract(EInteractAction InInteractAction, IInteractionAgentInterface* InInteractionAgent)
@@ -94,9 +93,9 @@ void AWHDPlayerCharacter::OnEnterInteract(IInteractionAgentInterface* InInteract
 {
 	Super::OnEnterInteract(InInteractionAgent);
 
-	if(UWidgetModuleStatics::GetUserWidget<UWHDWidgetCommonGameHUD>())
+	if(UWidgetModuleStatics::GetUserWidget<UWHDWidgetCommonInteractionBox>())
 	{
-		UWidgetModuleStatics::GetUserWidget<UWHDWidgetCommonGameHUD>()->ShowInteractActions(GetInteractableActions());
+		UWidgetModuleStatics::GetUserWidget<UWHDWidgetCommonInteractionBox>()->ShowInteractActions(Cast<UObject>(InInteractionAgent), GetInteractableActions());
 	}
 }
 
@@ -104,9 +103,9 @@ void AWHDPlayerCharacter::OnLeaveInteract(IInteractionAgentInterface* InInteract
 {
 	Super::OnLeaveInteract(InInteractionAgent);
 
-	if(UWidgetModuleStatics::GetUserWidget<UWHDWidgetCommonGameHUD>())
+	if(UWidgetModuleStatics::GetUserWidget<UWHDWidgetCommonInteractionBox>())
 	{
-		UWidgetModuleStatics::GetUserWidget<UWHDWidgetCommonGameHUD>()->HideInteractActions();
+		UWidgetModuleStatics::GetUserWidget<UWHDWidgetCommonInteractionBox>()->HideInteractActions();
 	}
 }
 
@@ -128,11 +127,27 @@ void AWHDPlayerCharacter::OnInteract(EInteractAction InInteractAction, IInteract
 	}
 	else
 	{
-		if(UWidgetModuleStatics::GetUserWidget<UWHDWidgetCommonGameHUD>())
+		if(UWidgetModuleStatics::GetUserWidget<UWHDWidgetCommonInteractionBox>())
 		{
-			UWidgetModuleStatics::GetUserWidget<UWHDWidgetCommonGameHUD>()->ShowInteractActions(GetInteractableActions());
+			UWidgetModuleStatics::GetUserWidget<UWHDWidgetCommonInteractionBox>()->ShowInteractActions(Cast<UObject>(InInteractionAgent), GetInteractableActions());
 		}
 	}
+}
+
+bool AWHDPlayerCharacter::OnGenerateVoxel(const FVoxelHitResult& InVoxelHitResult)
+{
+	if(!GenerateVoxelID.IsValid()) return false;
+	
+	FItemQueryInfo ItemQueryInfo = Inventory->QueryItemByRange(EItemQueryType::Remove, FAbilityItem(GenerateVoxelID, 1), -1);
+	if(ItemQueryInfo.IsValid())
+	{
+		if(Super::OnGenerateVoxel(InVoxelHitResult))
+		{
+			Inventory->RemoveItemByQueryInfo(ItemQueryInfo);
+			return true;
+		}
+	}
+	return false;
 }
 
 bool AWHDPlayerCharacter::OnInteractVoxel(const FVoxelHitResult& InVoxelHitResult, EInputInteractAction InInteractAction)

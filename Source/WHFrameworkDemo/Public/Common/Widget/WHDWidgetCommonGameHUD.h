@@ -35,12 +35,6 @@ public:
 	UFUNCTION(BlueprintCallable, BlueprintImplementableEvent)
 	void SetCrosshairVisible(bool bValue);
 
-	UFUNCTION(BlueprintImplementableEvent)
-	void ShowInteractActions(const TArray<EInteractAction>& InActions);
-		
-	UFUNCTION(BlueprintImplementableEvent)
-	void HideInteractActions();
-
 protected:
 	UFUNCTION()
 	void OnChangeInputMode(UObject* InSender, class UEventHandle_InputModeChanged* InEventHandle);

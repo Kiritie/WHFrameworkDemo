@@ -1,7 +1,6 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-
-#include "Common/Widgets/WHDWidgetCommonGameHUD.h"
+#include "Common/Widget/WHDWidgetCommonGameHUD.h"
 
 #include "Character/WHDPlayerCharacter.h"
 #include "Event/EventModuleStatics.h"
@@ -12,7 +11,7 @@
 
 UWHDWidgetCommonGameHUD::UWHDWidgetCommonGameHUD(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer)
 {
-	WidgetName = FName("GameHUD");
+	WidgetName = FName("CommonGameHUD");
 	WidgetType = EWidgetType::Permanent;
 	WidgetInputMode = EInputMode::GameOnly;
 

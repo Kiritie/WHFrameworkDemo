@@ -5,9 +5,11 @@
 #include "Character/WHDPlayerCharacter.h"
 #include "Common/CommonStatics.h"
 #include "Common/WHDCommonTypes.h"
+#include "Common/Widget/Inventory/WHDWidgetCommonInventoryBar.h"
 #include "Input/Components/InputComponentBase.h"
 #include "Voxel/VoxelModuleStatics.h"
 #include "Voxel/Voxels/Voxel.h"
+#include "Widget/WidgetModuleStatics.h"
 
 // ParamSets default values
 UWHDVoxelInputManager::UWHDVoxelInputManager()
@@ -24,14 +26,14 @@ void UWHDVoxelInputManager::OnBindAction(UInputComponentBase* InInputComponent)
 {
 	Super::OnBindAction(InInputComponent);
 
-	InInputComponent->BindInputAction(GameplayTags::InputTag_Primary, ETriggerEvent::Started, this, &UWHDVoxelInputManager::OnPrimaryPressed);
-	InInputComponent->BindInputAction(GameplayTags::InputTag_Primary, ETriggerEvent::Completed, this, &UWHDVoxelInputManager::OnPrimaryReleased);
+	InInputComponent->BindInputAction(GameplayTags::Input_Primary, ETriggerEvent::Started, this, &UWHDVoxelInputManager::OnPrimaryPressed);
+	InInputComponent->BindInputAction(GameplayTags::Input_Primary, ETriggerEvent::Completed, this, &UWHDVoxelInputManager::OnPrimaryReleased);
 
-	InInputComponent->BindInputAction(GameplayTags::InputTag_Minor, ETriggerEvent::Started, this, &UWHDVoxelInputManager::OnMinorPressed);
-	InInputComponent->BindInputAction(GameplayTags::InputTag_Minor, ETriggerEvent::Completed, this, &UWHDVoxelInputManager::OnMinorReleased);
+	InInputComponent->BindInputAction(GameplayTags::Input_Secondary, ETriggerEvent::Started, this, &UWHDVoxelInputManager::OnSecondaryPressed);
+	InInputComponent->BindInputAction(GameplayTags::Input_Secondary, ETriggerEvent::Completed, this, &UWHDVoxelInputManager::OnSecondaryReleased);
 
-	InInputComponent->BindInputAction(GameplayTags::InputTag_PrevInventorySlot, ETriggerEvent::Started, this, &UWHDVoxelInputManager::PrevInventorySlot);
-	InInputComponent->BindInputAction(GameplayTags::InputTag_NextInventorySlot, ETriggerEvent::Started, this, &UWHDVoxelInputManager::NextInventorySlot);
+	InInputComponent->BindInputAction(GameplayTags::Input_PrevInventorySlot, ETriggerEvent::Started, this, &UWHDVoxelInputManager::PrevInventorySlot);
+	InInputComponent->BindInputAction(GameplayTags::Input_NextInventorySlot, ETriggerEvent::Started, this, &UWHDVoxelInputManager::NextInventorySlot);
 }
 
 void UWHDVoxelInputManager::OnPrimaryPressed()
@@ -40,10 +42,10 @@ void UWHDVoxelInputManager::OnPrimaryPressed()
 
 	if(!PlayerCharacter) return;
 
-	FVoxelHitResult voxelHitResult;
-	if(UVoxelModuleStatics::VoxelRaycastSinge(VoxelRaycastType, 100000.f, {}, voxelHitResult))
+	FVoxelHitResult VoxelHitResult;
+	if(UVoxelModuleStatics::VoxelRaycastSinge(VoxelRaycastType, 100000.f, {}, VoxelHitResult))
 	{
-		voxelHitResult.GetVoxel().OnAgentInteract(PlayerCharacter, EInputInteractAction::Primary, voxelHitResult);
+		VoxelHitResult.GetVoxel().OnAgentInteract(PlayerCharacter, EInputInteractAction::Primary, VoxelHitResult);
 	}
 }
 
@@ -51,27 +53,29 @@ void UWHDVoxelInputManager::OnPrimaryReleased()
 {
 }
 
-void UWHDVoxelInputManager::OnMinorPressed()
+void UWHDVoxelInputManager::OnSecondaryPressed()
 {
 	AWHDPlayerCharacter* PlayerCharacter = UCommonStatics::GetPlayerPawn<AWHDPlayerCharacter>();
 
 	if(!PlayerCharacter) return;
 
-	FVoxelHitResult voxelHitResult;
-	if(UVoxelModuleStatics::VoxelRaycastSinge(VoxelRaycastType, 100000.f, {}, voxelHitResult))
+	FVoxelHitResult VoxelHitResult;
+	if(UVoxelModuleStatics::VoxelRaycastSinge(VoxelRaycastType, 100000.f, {}, VoxelHitResult))
 	{
-		voxelHitResult.GetVoxel().OnAgentInteract(PlayerCharacter, EInputInteractAction::Secondary, voxelHitResult);
+		VoxelHitResult.GetVoxel().OnAgentInteract(PlayerCharacter, EInputInteractAction::Secondary, VoxelHitResult);
 	}
 }
 
-void UWHDVoxelInputManager::OnMinorReleased()
+void UWHDVoxelInputManager::OnSecondaryReleased()
 {
 }
 
 void UWHDVoxelInputManager::PrevInventorySlot()
 {
+	UWidgetModuleStatics::GetUserWidget<UWHDWidgetCommonInventoryBar>()->PrevInventorySlot();
 }
 
 void UWHDVoxelInputManager::NextInventorySlot()
 {
+	UWidgetModuleStatics::GetUserWidget<UWHDWidgetCommonInventoryBar>()->NextInventorySlot();
 }
