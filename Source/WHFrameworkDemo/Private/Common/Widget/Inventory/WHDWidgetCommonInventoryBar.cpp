@@ -137,7 +137,7 @@ void UWHDWidgetCommonInventoryBar::SelectInventorySlot(int32 InSlotIndex, bool b
 	{
 		if(bRefreshInventory)
 		{
-			GetInventory()->SetSelectedSlot(ESlotSplitType::Shortcut, SelectedSlot->GetOwnerSlot());
+			GetInventory()->SetSelectedSlot(ESlotSplitType::Shortcut, InSlotIndex);
 		}
 		SelectedSlot->SetVisibility(ESlateVisibility::HitTestInvisible);
 	}

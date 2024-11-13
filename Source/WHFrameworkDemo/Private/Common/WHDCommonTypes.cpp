@@ -48,25 +48,4 @@ namespace GameplayTags
 	UE_DEFINE_GAMEPLAY_TAG_COMMENT(Input_OpenGeneratePanel, "Input.System.OpenGeneratePanel", "Open Generate Panel");
 	
 	UE_DEFINE_GAMEPLAY_TAG_COMMENT(Input_PauseGame, "Input.System.PauseGame", "Pause Game");
-
-	////////////////////////////////////////////////////
-	// State_Character
-	UE_DEFINE_GAMEPLAY_TAG_COMMENT(State_Character_Dodging, "State.Character.Dodging", "Character Dodging");
-	UE_DEFINE_GAMEPLAY_TAG_COMMENT(State_Character_Sprinting, "State.Character.Sprinting", "Character Sprinting");
-	UE_DEFINE_GAMEPLAY_TAG_COMMENT(State_Character_Crouching, "State.Character.Crouching", "Character Crouching");
-	UE_DEFINE_GAMEPLAY_TAG_COMMENT(State_Character_Swimming, "State.Character.Swimming", "Character Swimming");
-	UE_DEFINE_GAMEPLAY_TAG_COMMENT(State_Character_Floating, "State.Character.Floating", "Character Floating");
-	UE_DEFINE_GAMEPLAY_TAG_COMMENT(State_Character_Climbing, "State.Character.Climbing", "Character Climbing");
-	UE_DEFINE_GAMEPLAY_TAG_COMMENT(State_Character_Riding, "State.Character.Riding", "Character Riding");
-	UE_DEFINE_GAMEPLAY_TAG_COMMENT(State_Character_Flying, "State.Character.Flying", "Character Flying");
-	UE_DEFINE_GAMEPLAY_TAG_COMMENT(State_Character_Attacking, "State.Character.Attacking", "Character Attacking");
-	UE_DEFINE_GAMEPLAY_TAG_COMMENT(State_Character_NormalAttacking, "State.Character.NormalAttacking", "Character NormalAttacking");
-	UE_DEFINE_GAMEPLAY_TAG_COMMENT(State_Character_FallingAttacking, "State.Character.FallingAttacking", "Character FallingAttacking");
-	UE_DEFINE_GAMEPLAY_TAG_COMMENT(State_Character_SkillAttacking, "State.Character.SkillAttacking", "Character SkillAttacking");
-	UE_DEFINE_GAMEPLAY_TAG_COMMENT(State_Character_Defending, "State.Character.Defending", "Character Defending");
-	UE_DEFINE_GAMEPLAY_TAG_COMMENT(State_Character_Interrupting, "State.Character.Interrupting", "Character Interrupting");
-	UE_DEFINE_GAMEPLAY_TAG_COMMENT(State_Character_Exhausted, "State.Character.Exhausted", "Character Exhausted");
-	UE_DEFINE_GAMEPLAY_TAG_COMMENT(State_Character_FreeToAnim, "State.Character.FreeToAnim", "Character FreeToAnim");
-	UE_DEFINE_GAMEPLAY_TAG_COMMENT(State_Character_LockRotation, "State.Character.LockRotation", "Character LockRotation");
-	UE_DEFINE_GAMEPLAY_TAG_COMMENT(State_Character_BreakAllInput, "State.Character.BreakAllInput", "Character BreakAllInput");
 }
