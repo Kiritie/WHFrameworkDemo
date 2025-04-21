@@ -14,7 +14,7 @@ public:
 	AWHDRoamCameraActor();
 
 public:
-	virtual void OnPreparatory_Implementation(EPhase InPhase) override;
+	virtual void OnPreparatory_Implementation() override;
 
 public:
 	virtual void OnRefresh_Implementation(float DeltaSeconds) override;

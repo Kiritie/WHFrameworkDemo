@@ -105,7 +105,7 @@ FReply UWHDWidgetCommonInventorySlot::NativeOnMouseButtonDown(const FGeometry& I
 	return Super::NativeOnMouseButtonDown(InGeometry, InMouseEvent);
 }
 
-void UWHDWidgetCommonInventorySlot::OnCreate(UUserWidgetBase* InOwner, const TArray<FParameter>& InParams)
+void UWHDWidgetCommonInventorySlot::OnCreate(UUserWidget* InOwner, const TArray<FParameter>& InParams)
 {
 	Super::OnCreate(InOwner, InParams);
 }
@@ -162,9 +162,9 @@ void UWHDWidgetCommonInventorySlot::OnActivated_Implementation()
 	Super::OnActivated_Implementation();
 }
 
-void UWHDWidgetCommonInventorySlot::OnDeactived_Implementation()
+void UWHDWidgetCommonInventorySlot::OnDeactivated_Implementation()
 {
-	Super::OnDeactived_Implementation();
+	Super::OnDeactivated_Implementation();
 }
 
 void UWHDWidgetCommonInventorySlot::StartCooldown_Implementation()

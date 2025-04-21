@@ -21,16 +21,13 @@ void AWHDGameMode::OnInitialize_Implementation()
 	Super::OnInitialize_Implementation();
 }
 
-void AWHDGameMode::OnPreparatory_Implementation(EPhase InPhase)
+void AWHDGameMode::OnPreparatory_Implementation()
 {
-	Super::OnPreparatory_Implementation(InPhase);
+	Super::OnPreparatory_Implementation();
 
-	if(PHASEC(InPhase, EPhase::Final))
+	if(UWHDWidgetCommonGameHUD* GameHUD = UWidgetModuleStatics::CreateUserWidget<UWHDWidgetCommonGameHUD>(UCommonStatics::GetPlayerPawn()))
 	{
-		if(UWHDWidgetCommonGameHUD* GameHUD = UWidgetModuleStatics::CreateUserWidget<UWHDWidgetCommonGameHUD>(UCommonStatics::GetPlayerPawn()))
-		{
-			GameHUD->Open();
-		}
+		GameHUD->Open();
 	}
 }
 
@@ -39,7 +36,7 @@ void AWHDGameMode::OnRefresh_Implementation(float DeltaSeconds)
 	Super::OnRefresh_Implementation(DeltaSeconds);
 }
 
-void AWHDGameMode::OnTermination_Implementation(EPhase InPhase)
+void AWHDGameMode::OnTermination_Implementation()
 {
-	Super::OnTermination_Implementation(InPhase);
+	Super::OnTermination_Implementation();
 }

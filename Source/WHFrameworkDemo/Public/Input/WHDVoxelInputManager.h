@@ -23,25 +23,22 @@ public:
 	virtual void OnBindAction(UInputComponentBase* InInputComponent) override;
 
 protected:
-	UFUNCTION()
-	virtual void OnPrimaryPressed();
+	virtual void OnPrimaryPressed_Implementation() override;
 
-	UFUNCTION()
-	virtual void OnPrimaryReleased();
+	virtual void OnPrimaryRepeated_Implementation() override;
 
-	UFUNCTION()
-	virtual void OnSecondaryPressed();
+	virtual void OnPrimaryReleased_Implementation() override;
 
-	UFUNCTION()
-	virtual void OnSecondaryReleased();
+	virtual void OnSecondaryPressed_Implementation() override;
 
-	UFUNCTION()
-	virtual void PrevInventorySlot();
+	virtual void OnSecondaryRepeated_Implementation() override;
 
-	UFUNCTION()
-	virtual void NextInventorySlot();
+	virtual void OnSecondaryReleased_Implementation() override;
 	
 protected:
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "InputStats")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	EVoxelRaycastType VoxelRaycastType;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	float InteractDistance;
 };

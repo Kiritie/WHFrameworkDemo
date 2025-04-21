@@ -3,14 +3,14 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Event/Manager/EventManagerBase.h"
+#include "Event/Manager/DefaultEventManagerBase.h"
 #include "WHDEventManager.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class WHFRAMEWORKDEMO_API UWHDEventManager : public UEventManagerBase
+class WHFRAMEWORKDEMO_API UWHDEventManager : public UDefaultEventManagerBase
 {
 	GENERATED_BODY()
 

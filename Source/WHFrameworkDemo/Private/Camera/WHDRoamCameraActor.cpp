@@ -15,19 +15,19 @@ AWHDRoamCameraActor::AWHDRoamCameraActor()
 	bFloorToChunk = false;
 }
 
-void AWHDRoamCameraActor::OnPreparatory_Implementation(EPhase InPhase)
+void AWHDRoamCameraActor::OnPreparatory_Implementation()
 {
-	Super::OnPreparatory_Implementation(InPhase);
+	Super::OnPreparatory_Implementation();
 }
 
 void AWHDRoamCameraActor::OnRefresh_Implementation(float DeltaSeconds)
 {
 	Super::OnRefresh_Implementation(DeltaSeconds);
 
-	if(bFloorToChunk && GetActorLocation().Z == 0.f && UVoxelModule::Get().IsBasicGenerated())
+	if(bFloorToChunk && GetActorLocation().Z == 0.f && UVoxelModule::Get().IsWorldBasicGenerated())
 	{
 		FHitResult HitResult;
-		const FVector ChunkSize = UVoxelModuleStatics::GetWorldData().GetChunkRealSize();
+		const FVector ChunkSize = UVoxelModuleStatics::GetVoxelWorldData().GetChunkRealSize();
 		if(UVoxelModuleStatics::VoxelAgentTraceSingle(GetActorLocation(), FVector2D(ChunkSize.X, ChunkSize.Y), Sphere->GetScaledSphereRadius(), Sphere->GetScaledSphereRadius(), {}, HitResult, false, 10, true))
 		{
 			UCameraModuleStatics::SetCameraLocation(HitResult.Location);

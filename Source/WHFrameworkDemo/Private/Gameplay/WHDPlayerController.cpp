@@ -14,9 +14,9 @@ void AWHDPlayerController::OnInitialize_Implementation()
 	Super::OnInitialize_Implementation();
 }
 
-void AWHDPlayerController::OnPreparatory_Implementation(EPhase InPhase)
+void AWHDPlayerController::OnPreparatory_Implementation()
 {
-	Super::OnPreparatory_Implementation(InPhase);
+	Super::OnPreparatory_Implementation();
 }
 
 void AWHDPlayerController::OnRefresh_Implementation(float DeltaSeconds)
@@ -24,7 +24,7 @@ void AWHDPlayerController::OnRefresh_Implementation(float DeltaSeconds)
 	Super::OnRefresh_Implementation(DeltaSeconds);
 }
 
-void AWHDPlayerController::OnTermination_Implementation(EPhase InPhase)
+void AWHDPlayerController::OnTermination_Implementation()
 {
-	Super::OnTermination_Implementation(InPhase);
+	Super::OnTermination_Implementation();
 }

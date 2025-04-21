@@ -4,8 +4,12 @@
 
 #include "Ability/Character/AbilityCharacterInventoryBase.h"
 #include "Ability/Character/States/AbilityCharacterState_Fall.h"
+#include "Ability/Character/States/AbilityCharacterState_Float.h"
+#include "Ability/Character/States/AbilityCharacterState_Fly.h"
+#include "Ability/Character/States/AbilityCharacterState_Interrupt.h"
 #include "Ability/Character/States/AbilityCharacterState_Jump.h"
 #include "Ability/Character/States/AbilityCharacterState_Static.h"
+#include "Ability/Character/States/AbilityCharacterState_Swim.h"
 #include "Ability/Character/States/AbilityCharacterState_Walk.h"
 #include "Ability/Components/AbilitySystemComponentBase.h"
 #include "Character/CharacterModuleStatics.h"
@@ -39,9 +43,15 @@ AWHDPlayerCharacter::AWHDPlayerCharacter(const FObjectInitializer& ObjectInitial
 	FSM->States.Empty();
 	FSM->States.Add(UWHDPlayerCharacterState_Death::StaticClass());
 	FSM->States.Add(UWHDPlayerCharacterState_Spawn::StaticClass());
+	FSM->States.Add(UAbilityCharacterState_Death::StaticClass());
+	FSM->States.Add(UAbilityCharacterState_Spawn::StaticClass());
 	FSM->States.Add(UAbilityCharacterState_Fall::StaticClass());
+	FSM->States.Add(UAbilityCharacterState_Float::StaticClass());
+	FSM->States.Add(UAbilityCharacterState_Fly::StaticClass());
+	FSM->States.Add(UAbilityCharacterState_Interrupt::StaticClass());
 	FSM->States.Add(UAbilityCharacterState_Jump::StaticClass());
 	FSM->States.Add(UAbilityCharacterState_Static::StaticClass());
+	FSM->States.Add(UAbilityCharacterState_Swim::StaticClass());
 	FSM->States.Add(UAbilityCharacterState_Walk::StaticClass());
 
 	AutoPossessAI = EAutoPossessAI::Disabled;
@@ -134,23 +144,12 @@ void AWHDPlayerCharacter::OnInteract(EInteractAction InInteractAction, IInteract
 	}
 }
 
-bool AWHDPlayerCharacter::OnGenerateVoxel(const FVoxelHitResult& InVoxelHitResult)
+bool AWHDPlayerCharacter::OnGenerateVoxel(EInputInteractEvent InInteractEvent, const FVoxelHitResult& InHitResult)
 {
-	if(!GenerateVoxelID.IsValid()) return false;
-	
-	FItemQueryData ItemQueryData = Inventory->QueryItemByRange(EItemQueryType::Remove, FAbilityItem(GenerateVoxelID, 1), -1);
-	if(ItemQueryData.IsValid())
-	{
-		if(Super::OnGenerateVoxel(InVoxelHitResult))
-		{
-			Inventory->RemoveItemByQueryData(ItemQueryData);
-			return true;
-		}
-	}
-	return false;
+	return Super::OnGenerateVoxel(InInteractEvent, InHitResult);
 }
 
-bool AWHDPlayerCharacter::OnInteractVoxel(const FVoxelHitResult& InVoxelHitResult, EInputInteractAction InInteractAction)
+bool AWHDPlayerCharacter::OnDestroyVoxel(EInputInteractEvent InInteractEvent, const FVoxelHitResult& InHitResult)
 {
-	return Super::OnInteractVoxel(InVoxelHitResult, InInteractAction);
+	return Super::OnDestroyVoxel(InInteractEvent, InHitResult);
 }

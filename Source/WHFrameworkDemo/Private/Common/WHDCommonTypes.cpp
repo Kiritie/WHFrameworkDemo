@@ -9,6 +9,7 @@ namespace GameplayTags
 	UE_DEFINE_GAMEPLAY_TAG_COMMENT(Input_Interact3, "Input.Player.Interact3", "Interact3");
 	UE_DEFINE_GAMEPLAY_TAG_COMMENT(Input_Interact4, "Input.Player.Interact4", "Interact4");
 	UE_DEFINE_GAMEPLAY_TAG_COMMENT(Input_Interact5, "Input.Player.Interact5", "Interact5");
+	UE_DEFINE_GAMEPLAY_TAG_COMMENT(Input_NextInteract, "Input.Player.NextInteract", "NextInteract");
 	
 	UE_DEFINE_GAMEPLAY_TAG_COMMENT(Input_Dodge, "Input.Player.Dodge", "Dodge");
 	
@@ -16,10 +17,6 @@ namespace GameplayTags
 	UE_DEFINE_GAMEPLAY_TAG_COMMENT(Input_ToggleControlMode, "Input.Player.ToggleControlMode", "Toggle Control Mode");
 	UE_DEFINE_GAMEPLAY_TAG_COMMENT(Input_ToggleLockSightTarget, "Input.Player.ToggleLockSightTarget", "Toggle LockSight Target");
 	UE_DEFINE_GAMEPLAY_TAG_COMMENT(Input_ChangeHand, "Input.Player.ChangeHand", "ChangeHand");
-	
-	UE_DEFINE_GAMEPLAY_TAG_COMMENT(Input_Primary, "Input.Player.Primary", "PrimaryAction");
-	
-	UE_DEFINE_GAMEPLAY_TAG_COMMENT(Input_Secondary, "Input.Player.Secondary", "Secondary");
 	
 	UE_DEFINE_GAMEPLAY_TAG_COMMENT(Input_ReleaseSkillAbility1, "Input.Player.ReleaseSkillAbility1", "Release Skill Ability1");
 	UE_DEFINE_GAMEPLAY_TAG_COMMENT(Input_ReleaseSkillAbility2, "Input.Player.ReleaseSkillAbility2", "Release Skill Ability2");

@@ -48,12 +48,12 @@ void UWHDPlayerCharacterState_Spawn::TryLeave()
 	{
 		Super::TryLeave();
 	}
-	else if(UVoxelModule::Get().IsBasicGenerated())
+	else if(UVoxelModule::Get().IsWorldBasicGenerated())
 	{
 		AWHDPlayerCharacter* PlayerCharacter = GetAgent<AWHDPlayerCharacter>();
 		if(PlayerCharacter->GetActorLocation().Z <= 0.f)
 		{
-			const FVector ChunkSize = UVoxelModuleStatics::GetWorldData().GetChunkRealSize();
+			const FVector ChunkSize = UVoxelModuleStatics::GetVoxelWorldData().GetChunkRealSize();
 			FHitResult HitResult;
 			if(UVoxelModuleStatics::VoxelAgentTraceSingle(PlayerCharacter->GetActorLocation(), FVector2D(ChunkSize.X, ChunkSize.Y), PlayerCharacter->GetCapsuleComponent()->GetScaledCapsuleRadius(), PlayerCharacter->GetCapsuleComponent()->GetScaledCapsuleHalfHeight(), {}, HitResult, false, 10, true))
 			{

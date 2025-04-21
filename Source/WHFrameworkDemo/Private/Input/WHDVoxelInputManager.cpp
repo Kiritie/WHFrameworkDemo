@@ -4,17 +4,14 @@
 
 #include "Character/WHDPlayerCharacter.h"
 #include "Common/CommonStatics.h"
-#include "Common/WHDCommonTypes.h"
-#include "Common/Widget/Inventory/WHDWidgetCommonInventoryBar.h"
-#include "Input/Components/InputComponentBase.h"
 #include "Voxel/VoxelModuleStatics.h"
 #include "Voxel/Voxels/Voxel.h"
-#include "Widget/WidgetModuleStatics.h"
 
 // ParamSets default values
 UWHDVoxelInputManager::UWHDVoxelInputManager()
 {
 	VoxelRaycastType = EVoxelRaycastType::FromAimPoint;
+	InteractDistance = 500.f;
 }
 
 void UWHDVoxelInputManager::OnInitialize()
@@ -25,57 +22,90 @@ void UWHDVoxelInputManager::OnInitialize()
 void UWHDVoxelInputManager::OnBindAction(UInputComponentBase* InInputComponent)
 {
 	Super::OnBindAction(InInputComponent);
-
-	InInputComponent->BindInputAction(GameplayTags::Input_Primary, ETriggerEvent::Started, this, &UWHDVoxelInputManager::OnPrimaryPressed);
-	InInputComponent->BindInputAction(GameplayTags::Input_Primary, ETriggerEvent::Completed, this, &UWHDVoxelInputManager::OnPrimaryReleased);
-
-	InInputComponent->BindInputAction(GameplayTags::Input_Secondary, ETriggerEvent::Started, this, &UWHDVoxelInputManager::OnSecondaryPressed);
-	InInputComponent->BindInputAction(GameplayTags::Input_Secondary, ETriggerEvent::Completed, this, &UWHDVoxelInputManager::OnSecondaryReleased);
-
-	InInputComponent->BindInputAction(GameplayTags::Input_PrevInventorySlot, ETriggerEvent::Started, this, &UWHDVoxelInputManager::PrevInventorySlot);
-	InInputComponent->BindInputAction(GameplayTags::Input_NextInventorySlot, ETriggerEvent::Started, this, &UWHDVoxelInputManager::NextInventorySlot);
 }
 
-void UWHDVoxelInputManager::OnPrimaryPressed()
+void UWHDVoxelInputManager::OnPrimaryPressed_Implementation()
 {
 	AWHDPlayerCharacter* PlayerCharacter = UCommonStatics::GetPlayerPawn<AWHDPlayerCharacter>();
 
 	if(!PlayerCharacter) return;
 
 	FVoxelHitResult VoxelHitResult;
-	if(UVoxelModuleStatics::VoxelRaycastSinge(VoxelRaycastType, 100000.f, {}, VoxelHitResult))
+	if(UVoxelModuleStatics::VoxelRaycastSinge(VoxelRaycastType, InteractDistance, {}, VoxelHitResult))
 	{
-		VoxelHitResult.GetVoxel().OnAgentInteract(PlayerCharacter, EInputInteractAction::Primary, VoxelHitResult);
+		PlayerCharacter->InteractVoxel(EInputInteractAction::Primary, EInputInteractEvent::Started, VoxelHitResult);
 	}
 }
 
-void UWHDVoxelInputManager::OnPrimaryReleased()
-{
-}
-
-void UWHDVoxelInputManager::OnSecondaryPressed()
+void UWHDVoxelInputManager::OnPrimaryRepeated_Implementation()
 {
 	AWHDPlayerCharacter* PlayerCharacter = UCommonStatics::GetPlayerPawn<AWHDPlayerCharacter>();
 
 	if(!PlayerCharacter) return;
 
 	FVoxelHitResult VoxelHitResult;
-	if(UVoxelModuleStatics::VoxelRaycastSinge(VoxelRaycastType, 100000.f, {}, VoxelHitResult))
+	if(UVoxelModuleStatics::VoxelRaycastSinge(VoxelRaycastType, InteractDistance, {}, VoxelHitResult))
 	{
-		VoxelHitResult.GetVoxel().OnAgentInteract(PlayerCharacter, EInputInteractAction::Secondary, VoxelHitResult);
+		PlayerCharacter->InteractVoxel(EInputInteractAction::Primary, EInputInteractEvent::Triggered, VoxelHitResult);
 	}
 }
 
-void UWHDVoxelInputManager::OnSecondaryReleased()
+void UWHDVoxelInputManager::OnPrimaryReleased_Implementation()
 {
+	AWHDPlayerCharacter* PlayerCharacter = UCommonStatics::GetPlayerPawn<AWHDPlayerCharacter>();
+
+	if(!PlayerCharacter) return;
+
+	FVoxelHitResult VoxelHitResult;
+	if(UVoxelModuleStatics::VoxelRaycastSinge(VoxelRaycastType, InteractDistance, {}, VoxelHitResult))
+	{
+		PlayerCharacter->InteractVoxel(EInputInteractAction::Primary, EInputInteractEvent::Completed, VoxelHitResult);
+	}
+	else
+	{
+		PlayerCharacter->UnInteractVoxel(EInputInteractAction::Primary, EInputInteractEvent::Completed);
+	}
 }
 
-void UWHDVoxelInputManager::PrevInventorySlot()
+void UWHDVoxelInputManager::OnSecondaryPressed_Implementation()
 {
-	UWidgetModuleStatics::GetUserWidget<UWHDWidgetCommonInventoryBar>()->PrevInventorySlot();
+	AWHDPlayerCharacter* PlayerCharacter = UCommonStatics::GetPlayerPawn<AWHDPlayerCharacter>();
+
+	if(!PlayerCharacter) return;
+
+	FVoxelHitResult VoxelHitResult;
+	if(UVoxelModuleStatics::VoxelRaycastSinge(VoxelRaycastType, InteractDistance, {}, VoxelHitResult))
+	{
+		PlayerCharacter->InteractVoxel(EInputInteractAction::Secondary, EInputInteractEvent::Started, VoxelHitResult);
+	}
 }
 
-void UWHDVoxelInputManager::NextInventorySlot()
+void UWHDVoxelInputManager::OnSecondaryRepeated_Implementation()
 {
-	UWidgetModuleStatics::GetUserWidget<UWHDWidgetCommonInventoryBar>()->NextInventorySlot();
+	AWHDPlayerCharacter* PlayerCharacter = UCommonStatics::GetPlayerPawn<AWHDPlayerCharacter>();
+
+	if(!PlayerCharacter) return;
+
+	FVoxelHitResult VoxelHitResult;
+	if(UVoxelModuleStatics::VoxelRaycastSinge(VoxelRaycastType, InteractDistance, {}, VoxelHitResult))
+	{
+		PlayerCharacter->InteractVoxel(EInputInteractAction::Secondary, EInputInteractEvent::Triggered, VoxelHitResult);
+	}
+}
+
+void UWHDVoxelInputManager::OnSecondaryReleased_Implementation()
+{
+	AWHDPlayerCharacter* PlayerCharacter = UCommonStatics::GetPlayerPawn<AWHDPlayerCharacter>();
+
+	if(!PlayerCharacter) return;
+
+	FVoxelHitResult VoxelHitResult;
+	if(UVoxelModuleStatics::VoxelRaycastSinge(VoxelRaycastType, InteractDistance, {}, VoxelHitResult))
+	{
+		PlayerCharacter->InteractVoxel(EInputInteractAction::Secondary, EInputInteractEvent::Completed, VoxelHitResult);
+	}
+	else
+	{
+		PlayerCharacter->UnInteractVoxel(EInputInteractAction::Secondary, EInputInteractEvent::Completed);
+	}
 }

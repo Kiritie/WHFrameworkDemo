@@ -38,15 +38,15 @@ protected:
 	virtual FReply NativeOnMouseButtonDown(const FGeometry& InGeometry, const FPointerEvent& InMouseEvent) override;
 
 public:
-	virtual void OnCreate(UUserWidgetBase* InOwner, const TArray<FParameter>& InParams) override;
+	virtual void OnCreate(UUserWidget* InOwner, const TArray<FParameter>& InParams) override;
 
 	virtual void OnInitialize(const TArray<FParameter>& InParams) override;
 
 	virtual void OnRefresh() override;
 
 	virtual void OnActivated_Implementation() override;
-	
-	virtual void OnDeactived_Implementation() override;
+
+	virtual void OnDeactivated_Implementation() override;
 		
 protected:
 	virtual void StartCooldown_Implementation() override;

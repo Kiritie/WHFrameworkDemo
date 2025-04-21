@@ -36,4 +36,43 @@ protected:
 
 	UFUNCTION()
 	virtual void DoInteract5();
+
+	UFUNCTION()
+	virtual void NextInteract();
+
+	UFUNCTION()
+	virtual void SelectInventorySlot1();
+
+	UFUNCTION()
+	virtual void SelectInventorySlot2();
+
+	UFUNCTION()
+	virtual void SelectInventorySlot3();
+
+	UFUNCTION()
+	virtual void SelectInventorySlot4();
+
+	UFUNCTION()
+	virtual void SelectInventorySlot5();
+
+	UFUNCTION()
+	virtual void SelectInventorySlot6();
+
+	UFUNCTION()
+	virtual void SelectInventorySlot7();
+
+	UFUNCTION()
+	virtual void SelectInventorySlot8();
+
+	UFUNCTION()
+	virtual void SelectInventorySlot9();
+
+	UFUNCTION()
+	virtual void SelectInventorySlot10();
+
+	UFUNCTION()
+	virtual void PrevInventorySlot();
+
+	UFUNCTION()
+	virtual void NextInventorySlot();
 };
