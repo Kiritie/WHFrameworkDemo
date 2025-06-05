@@ -20,6 +20,7 @@
 #include "Common/Widget/Interaction/WHDWidgetCommonInteractionBox.h"
 #include "Components/SkeletalMeshComponent.h"
 #include "FSM/Components/FSMComponent.h"
+#include "GameFramework/CharacterMovementComponent.h"
 #include "Voxel/Voxels/Auxiliary/VoxelInteractAuxiliary.h"
 #include "Widget/WidgetModuleStatics.h"
 
@@ -55,6 +56,8 @@ AWHDPlayerCharacter::AWHDPlayerCharacter(const FObjectInitializer& ObjectInitial
 	FSM->States.Add(UAbilityCharacterState_Walk::StaticClass());
 
 	AutoPossessAI = EAutoPossessAI::Disabled;
+
+	LastStayLocation = FVector::ZeroVector;
 }
 
 void AWHDPlayerCharacter::OnInitialize_Implementation()
@@ -71,6 +74,19 @@ void AWHDPlayerCharacter::OnInitialize_Implementation()
 void AWHDPlayerCharacter::OnRefresh_Implementation(float DeltaSeconds)
 {
 	Super::OnRefresh_Implementation(DeltaSeconds);
+
+	if(IsActive())
+	{
+		if(GetCharacterMovement()->IsMovingOnGround())
+		{
+			LastStayLocation = GetActorLocation();
+		}
+		if(GetActorLocation().Z <= 0.f)
+		{
+			SetActorLocation(LastStayLocation);
+			GetCharacterMovement()->Velocity = FVector::ZeroVector;
+		}
+	}
 }
 
 void AWHDPlayerCharacter::LoadData(FSaveData* InSaveData, EPhase InPhase)

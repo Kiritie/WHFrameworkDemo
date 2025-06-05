@@ -61,11 +61,11 @@ void UWHDWidgetCommonInteractionBox::ShowInteractActions_Implementation(const TS
 	}
 	else if(AVoxelInteractAuxiliary* Auxiliary = Cast<AVoxelInteractAuxiliary>(InteractionAgent.GetObject()))
 	{
-		Item = FAbilityItem(Auxiliary->GetVoxelItem());
+		Item = Auxiliary->GetVoxelItem().ID;
 	}
 	else if(IPrimaryEntityInterface* Entity = Cast<IPrimaryEntityInterface>(InteractionAgent.GetObject()))
 	{
-		Item = FAbilityItem(Entity->Execute_GetAssetID(InteractionAgent.GetObject()));
+		Item = Entity->Execute_GetAssetID(InteractionAgent.GetObject());
 	}
 	
 	if(Item.IsValid() && InInteractionAgent.GetObject() != GetOwnerObject())

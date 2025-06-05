@@ -41,4 +41,7 @@ protected:
 	virtual bool OnGenerateVoxel(EInputInteractEvent InInteractEvent, const FVoxelHitResult& InHitResult) override;
 
 	virtual bool OnDestroyVoxel(EInputInteractEvent InInteractEvent, const FVoxelHitResult& InHitResult) override;
+
+protected:
+	FVector LastStayLocation;
 };

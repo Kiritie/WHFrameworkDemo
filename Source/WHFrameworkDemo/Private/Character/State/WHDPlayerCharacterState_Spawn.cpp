@@ -6,7 +6,6 @@
 #include "Components/CapsuleComponent.h"
 #include "Voxel/VoxelModule.h"
 #include "Voxel/VoxelModuleStatics.h"
-#include "Voxel/Chunks/VoxelChunk.h"
 
 UWHDPlayerCharacterState_Spawn::UWHDPlayerCharacterState_Spawn()
 {
@@ -48,25 +47,22 @@ void UWHDPlayerCharacterState_Spawn::TryLeave()
 	{
 		Super::TryLeave();
 	}
-	else if(UVoxelModule::Get().IsWorldBasicGenerated())
+	else if(UVoxelModule::Get().GetWorldGeneratePercent() >= 1.f)
 	{
 		AWHDPlayerCharacter* PlayerCharacter = GetAgent<AWHDPlayerCharacter>();
-		if(PlayerCharacter->GetActorLocation().Z <= 0.f)
+		if(PlayerCharacter->GetActorLocation().Z == UVoxelModule::Get().GetWorldData().GetWorldRealHeight())
 		{
-			const FVector ChunkSize = UVoxelModuleStatics::GetVoxelWorldData().GetChunkRealSize();
+			const FVector2D ChunkSize = UVoxelModuleStatics::GetVoxelWorldData().GetChunkRealSize();
 			FHitResult HitResult;
-			if(UVoxelModuleStatics::VoxelAgentTraceSingle(PlayerCharacter->GetActorLocation(), FVector2D(ChunkSize.X, ChunkSize.Y), PlayerCharacter->GetCapsuleComponent()->GetScaledCapsuleRadius(), PlayerCharacter->GetCapsuleComponent()->GetScaledCapsuleHalfHeight(), {}, HitResult, false, 10, true))
+			if(UVoxelModuleStatics::VoxelAgentTraceSingle(PlayerCharacter->GetActorLocation(), ChunkSize, PlayerCharacter->GetCapsuleComponent()->GetScaledCapsuleRadius(), PlayerCharacter->GetCapsuleComponent()->GetScaledCapsuleHalfHeight(), {}, HitResult, false, 10, true))
 			{
 				PlayerCharacter->SetActorLocation(HitResult.Location);
 				Super::TryLeave();
 			}
 		}
-		else if(AVoxelChunk* VoxelChunk = Cast<AVoxelChunk>(ISceneActorInterface::Execute_GetContainer(PlayerCharacter).GetObject()))
+		else
 		{
-			if(VoxelChunk->IsGenerated())
-			{
-				Super::TryLeave();
-			}
+			Super::TryLeave();
 		}
 	}
 }

@@ -24,11 +24,11 @@ void AWHDRoamCameraActor::OnRefresh_Implementation(float DeltaSeconds)
 {
 	Super::OnRefresh_Implementation(DeltaSeconds);
 
-	if(bFloorToChunk && GetActorLocation().Z == 0.f && UVoxelModule::Get().IsWorldBasicGenerated())
+	if(bFloorToChunk && GetActorLocation().Z == 0.f && UVoxelModule::Get().GetWorldGeneratePercent() >= 1.f)
 	{
 		FHitResult HitResult;
-		const FVector ChunkSize = UVoxelModuleStatics::GetVoxelWorldData().GetChunkRealSize();
-		if(UVoxelModuleStatics::VoxelAgentTraceSingle(GetActorLocation(), FVector2D(ChunkSize.X, ChunkSize.Y), Sphere->GetScaledSphereRadius(), Sphere->GetScaledSphereRadius(), {}, HitResult, false, 10, true))
+		const FVector2D ChunkSize = UVoxelModuleStatics::GetVoxelWorldData().GetChunkRealSize();
+		if(UVoxelModuleStatics::VoxelAgentTraceSingle(GetActorLocation(), ChunkSize, Sphere->GetScaledSphereRadius(), Sphere->GetScaledSphereRadius(), {}, HitResult, false, 10, true))
 		{
 			UCameraModuleStatics::SetCameraLocation(HitResult.Location);
 		}
